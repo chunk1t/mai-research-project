@@ -1,0 +1,517 @@
+<title>Retrieval Failure Casebook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap">
+
+<style>
+:root {
+  --paper:#F6F7FA; --surface:#FFFFFF; --surface-2:#EFF1F6;
+  --ink:#151A24; --ink-2:#3C4457; --muted:#606A80; --line:#DCE0E9; --line-2:#C6CCDA;
+  --accent:#3A4B9E; --accent-soft:#E7EAF7;
+  --ok:#2C6B4F; --ok-soft:#E1EFE7; --bad:#A03429; --bad-soft:#F6E3E0;
+  --hold:#8A6216; --hold-soft:#F5EBD8; --null:#5B6376; --null-soft:#E8EAF0;
+  --sans:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --serif:"IBM Plex Serif",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r:4px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1117; --surface:#151A22; --surface-2:#1B2029;
+    --ink:#E7EAF1; --ink-2:#C2C9D6; --muted:#939CB0; --line:#252B36; --line-2:#333B49;
+    --accent:#94A4F2; --accent-soft:#1D2340;
+    --ok:#71C097; --ok-soft:#16281F; --bad:#E5867B; --bad-soft:#2C1917;
+    --hold:#D5A94E; --hold-soft:#2A2113; --null:#8F98AC; --null-soft:#1E232C;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1117; --surface:#151A22; --surface-2:#1B2029;
+  --ink:#E7EAF1; --ink-2:#C2C9D6; --muted:#939CB0; --line:#252B36; --line-2:#333B49;
+  --accent:#94A4F2; --accent-soft:#1D2340;
+  --ok:#71C097; --ok-soft:#16281F; --bad:#E5867B; --bad-soft:#2C1917;
+  --hold:#D5A94E; --hold-soft:#2A2113; --null:#8F98AC; --null-soft:#1E232C;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:15px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0; text-wrap:balance; font-weight:600; letter-spacing:-0.01em}
+p{margin:0}
+button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none !important; animation:none !important}}
+
+.eyebrow{
+  font-family:var(--mono); font-size:10.5px; font-weight:500;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--muted);
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  border-bottom:1px solid var(--line); background:var(--surface);
+  padding:22px clamp(16px,4vw,40px) 18px;
+}
+.masthead-in{max-width:1400px; margin:0 auto; display:flex; flex-wrap:wrap; gap:20px 32px; align-items:flex-end; justify-content:space-between}
+.masthead h1{font-size:clamp(20px,2.4vw,26px)}
+.masthead .sub{color:var(--muted); font-size:13.5px; max-width:62ch; margin-top:6px}
+.stat-row{display:flex; gap:26px; flex-wrap:wrap}
+.stat{display:flex; flex-direction:column; gap:1px}
+.stat b{font-family:var(--mono); font-size:17px; font-weight:600; font-variant-numeric:tabular-nums}
+.stat span{font-family:var(--mono); font-size:9.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--muted)}
+
+/* ---------- layout ---------- */
+.layout{
+  max-width:1400px; margin:0 auto; display:grid;
+  grid-template-columns:minmax(280px,340px) minmax(0,1fr);
+  gap:0; align-items:start;
+}
+@media (max-width:900px){ .layout{grid-template-columns:1fr} }
+
+.rail{
+  border-right:1px solid var(--line); background:var(--surface);
+  position:sticky; top:0; max-height:100vh; overflow-y:auto; padding-bottom:28px;
+}
+@media (max-width:900px){ .rail{position:static; max-height:none; border-right:0; border-bottom:1px solid var(--line)} }
+.rail-head{padding:18px clamp(14px,2vw,20px) 8px; position:sticky; top:0; background:var(--surface); border-bottom:1px solid var(--line); z-index:2}
+.rail-group{padding:16px clamp(14px,2vw,20px) 4px}
+.rail-group .eyebrow{display:block; margin-bottom:2px}
+.rail-group .gloss{font-size:12px; color:var(--muted); margin-bottom:8px}
+
+.case-btn{
+  display:block; width:100%; text-align:left; padding:9px 10px;
+  border:1px solid transparent; border-radius:var(--r); margin-bottom:2px;
+  transition:background .12s ease, border-color .12s ease;
+}
+.case-btn:hover{background:var(--surface-2)}
+.case-btn[aria-current="true"]{background:var(--accent-soft); border-color:var(--accent)}
+.case-btn .cid{font-family:var(--mono); font-size:11.5px; color:var(--muted); display:block}
+.case-btn .cq{font-size:13px; color:var(--ink-2); display:block; margin:2px 0 6px;
+  overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical}
+.case-btn[aria-current="true"] .cq{color:var(--ink)}
+
+/* the six-cell outcome strip: one cell per configuration, arm 1 then arm 2 */
+.strip{display:flex; gap:2px}
+.strip i{height:5px; flex:1; border-radius:1px; background:var(--null-soft)}
+.strip i[data-tone="ok"]{background:var(--ok)}
+.strip i[data-tone="bad"]{background:var(--bad)}
+.strip i[data-tone="hold"]{background:var(--hold)}
+.strip i[data-tone="null"]{background:var(--line-2)}
+.strip .gap{flex:0 0 6px; background:none}
+
+/* ---------- stage ---------- */
+.stage{padding:clamp(20px,3vw,34px) clamp(16px,3.4vw,44px) 60px; min-width:0}
+.case-head{border-bottom:1px solid var(--line); padding-bottom:20px; margin-bottom:24px}
+.chips{display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-bottom:12px}
+.chip{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+  padding:3px 7px; border-radius:2px; border:1px solid var(--line-2); color:var(--muted);
+}
+.chip.solid{background:var(--accent-soft); border-color:transparent; color:var(--accent)}
+.question{font-family:var(--serif); font-size:clamp(19px,2.3vw,25px); line-height:1.35; letter-spacing:-0.01em}
+.gold{margin-top:12px; display:flex; gap:10px; align-items:baseline; flex-wrap:wrap}
+.gold .k{font-family:var(--mono); font-size:10.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--muted)}
+.gold .v{font-family:var(--mono); font-size:14px; font-weight:500}
+.gold .v.none{color:var(--hold); font-style:normal}
+.why{margin-top:14px; padding-left:12px; border-left:2px solid var(--accent);
+  color:var(--ink-2); font-size:14px; max-width:70ch}
+
+.sec{margin-bottom:30px}
+.sec > h2{font-size:13px; letter-spacing:.02em; margin-bottom:2px}
+.sec > .lede{font-size:12.5px; color:var(--muted); margin-bottom:14px; max-width:74ch}
+
+/* evidence */
+.passage{border:1px solid var(--line); border-radius:var(--r); background:var(--surface); margin-bottom:10px; overflow:hidden}
+.passage-bar{display:flex; gap:8px; align-items:center; flex-wrap:wrap; padding:8px 12px; border-bottom:1px solid var(--line); background:var(--surface-2)}
+.passage-bar .pid{font-family:var(--mono); font-size:11.5px; color:var(--muted)}
+.tag{font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; padding:2px 6px; border-radius:2px}
+.tag.answer{background:var(--ok-soft); color:var(--ok)}
+.tag.injected{background:var(--hold-soft); color:var(--hold)}
+.tag.context{background:var(--null-soft); color:var(--null)}
+.passage-body{font-family:var(--serif); font-size:14px; line-height:1.62; color:var(--ink-2); padding:12px 14px; max-height:7.6em; overflow:hidden; position:relative}
+.passage-body.open{max-height:none}
+.passage-body:not(.open)::after{content:""; position:absolute; inset:auto 0 0 0; height:2.6em;
+  background:linear-gradient(to bottom,transparent,var(--surface))}
+.more{font-family:var(--mono); font-size:11px; color:var(--accent); padding:0 14px 10px}
+
+.diff{border:1px solid var(--line-2); border-radius:var(--r); overflow:hidden; margin-bottom:12px}
+.diff-row{display:grid; grid-template-columns:auto 1fr; gap:0}
+.diff-row + .diff-row{border-top:1px solid var(--line)}
+.diff-k{font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase;
+  padding:12px 10px; display:flex; align-items:flex-start; white-space:nowrap}
+.diff-v{font-family:var(--serif); font-size:13.5px; line-height:1.55; padding:11px 14px 12px 4px}
+.diff-row.a{background:var(--ok-soft)} .diff-row.a .diff-k{color:var(--ok)}
+.diff-row.b{background:var(--hold-soft)} .diff-row.b .diff-k{color:var(--hold)}
+mark{background:transparent; color:inherit; font-weight:600; box-shadow:inset 0 -0.5em 0 rgba(138,98,22,.22); border-radius:1px}
+
+/* the matrix: rows are pipeline classes, columns are generator arms */
+.matrix{display:grid; grid-template-columns:132px repeat(2,minmax(0,1fr)); gap:8px 10px; align-items:stretch}
+@media (max-width:760px){ .matrix{grid-template-columns:1fr} }
+.mx-corner{}
+.mx-colhead{padding:0 2px 2px}
+.mx-colhead b{display:block; font-family:var(--mono); font-size:12px; font-weight:600}
+.mx-colhead span{font-size:11px; color:var(--muted)}
+.mx-rowhead{display:flex; flex-direction:column; justify-content:center; gap:3px; padding-right:4px}
+.mx-rowhead b{font-size:13px; font-weight:600; display:block}
+.mx-rowhead span{font-family:var(--mono); font-size:10px; line-height:1.35; color:var(--muted); display:block}
+@media (max-width:760px){
+  .mx-corner{display:none}
+  .mx-rowhead{padding-top:14px; border-top:1px solid var(--line)}
+  .mx-colhead{display:none}
+  .arm .arm-config{display:block}
+}
+
+.arm{border:1px solid var(--line); border-left:3px solid var(--line-2); border-radius:var(--r);
+  background:var(--surface); padding:11px 13px; display:flex; flex-direction:column; gap:7px}
+.arm[data-tone="ok"]{border-left-color:var(--ok)}
+.arm[data-tone="bad"]{border-left-color:var(--bad)}
+.arm[data-tone="hold"]{border-left-color:var(--hold)}
+.arm-top{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+.pill{font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+  padding:2.5px 7px; border-radius:2px; font-weight:500}
+.pill[data-tone="ok"]{background:var(--ok-soft); color:var(--ok)}
+.pill[data-tone="bad"]{background:var(--bad-soft); color:var(--bad)}
+.pill[data-tone="hold"]{background:var(--hold-soft); color:var(--hold)}
+.pill[data-tone="null"]{background:var(--null-soft); color:var(--null)}
+.arm-config{font-family:var(--mono); font-size:10px; color:var(--muted); display:none}
+.arm-answer{font-family:var(--mono); font-size:13px; line-height:1.5; word-break:break-word}
+.arm-answer.abstain{color:var(--hold)}
+.arm-answer.none{color:var(--muted); font-style:italic}
+.arm-meta{font-family:var(--mono); font-size:10.5px; color:var(--muted); display:flex; gap:12px; flex-wrap:wrap}
+.arm details{border-top:1px solid var(--line); padding-top:7px}
+.arm summary{font-family:var(--mono); font-size:10.5px; color:var(--accent); list-style:none}
+.arm summary::-webkit-details-marker{display:none}
+.arm summary::before{content:"› "; }
+.arm details[open] summary::before{content:"⌄ "; }
+.raw{font-family:var(--mono); font-size:11.5px; line-height:1.55; color:var(--ink-2);
+  white-space:pre-wrap; margin-top:7px; max-height:340px; overflow:auto;
+  background:var(--surface-2); padding:9px 10px; border-radius:2px}
+.substeps{margin:6px 0 0; padding-left:16px; font-family:var(--mono); font-size:11px; color:var(--muted)}
+.substeps li{margin-bottom:2px}
+
+/* legend + footer */
+.legend{display:flex; gap:14px; flex-wrap:wrap; padding:14px clamp(14px,2vw,20px) 0; border-top:1px solid var(--line); margin-top:14px}
+.legend div{display:flex; gap:6px; align-items:center; font-size:11.5px; color:var(--muted)}
+.legend i{width:9px; height:9px; border-radius:2px; flex:none}
+.colophon{border-top:1px solid var(--line); background:var(--surface); padding:22px clamp(16px,4vw,40px) 34px}
+.colophon-in{max-width:1400px; margin:0 auto; display:grid; gap:16px 40px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.colophon h3{font-size:12px; margin-bottom:5px}
+.colophon p{font-size:12.5px; color:var(--muted); max-width:60ch}
+.colophon code{font-family:var(--mono); font-size:11.5px; color:var(--ink-2)}
+</style>
+
+<header class="masthead">
+  <div class="masthead-in">
+    <div>
+      <p class="eyebrow">Does reasoning help? &nbsp;·&nbsp; WQF7023 research project</p>
+      <h1>Retrieval Failure Casebook</h1>
+      <p class="sub">Twenty-four cases from a benchmark of retrieval-augmented generation under
+      imperfect retrieval, each shown as six systems answered it. Every response below is the
+      one the reported numbers were computed from.</p>
+    </div>
+    <div class="stat-row" id="stats"></div>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="rail" aria-label="Cases">
+    <div class="rail-head">
+      <p class="eyebrow">The casebook</p>
+      <p style="font-size:12px;color:var(--muted);margin-top:2px">
+        Each strip shows six configurations: three pipeline classes on each of two generators.</p>
+    </div>
+    <div id="rail"></div>
+    <div class="legend">
+      <div><i style="background:var(--ok)"></i> handled</div>
+      <div><i style="background:var(--hold)"></i> partial or abstained</div>
+      <div><i style="background:var(--bad)"></i> failed</div>
+      <div><i style="background:var(--line-2)"></i> no answer parsed</div>
+    </div>
+  </nav>
+  <main class="stage" id="stage"></main>
+</div>
+
+<footer class="colophon">
+  <div class="colophon-in">
+    <div>
+      <h3>Where this comes from</h3>
+      <p>Responses are read from <code>runs/results.jsonl</code>, verdicts from
+      <code>runs/scored.jsonl</code>. Nothing on this page is regenerated, and no model is
+      called: it is the stored record of a run of 34,283 scored instances.</p>
+    </div>
+    <div>
+      <h3>Reading a case</h3>
+      <p>Rows are the three pipeline classes; columns are the two generators. A difference down
+      a column is orchestration. A difference across a row is the base model — which, across the
+      full study, is the larger of the two.</p>
+    </div>
+    <div>
+      <h3>Running it yourself</h3>
+      <p><code>python scripts/demo.py case &lt;case-id&gt;</code> replays any of these offline
+      through the real pipelines, and <code>demo.py verify</code> checks that every response
+      served came out of this run.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const DATA = __DEMO_DATA__;
+
+const DIMENSIONS = {
+  refusal: {rq:"RQ1 · Refusal", gloss:"The evidence does not answer the question. Abstaining is the correct behaviour — and refusing an answerable control is not."},
+  conflict:{rq:"RQ2 · Conflicting evidence", gloss:"Two passages disagree on the answering claim. Scored 0–4 on whether the response notices."},
+  noise:   {rq:"RQ3 · Distracting passages", gloss:"The answer passage is present, buried under distractors at a fixed token proportion."}
+};
+const CLASS_LABEL = {naive:"Naive", reasoning:"Reasoning", agentic:"Agentic"};
+const CLASS_GLOSS = {naive:"retrieve, generate", reasoning:"reason, then answer",
+                    agentic:"decompose, re-retrieve, synthesise"};
+
+const store = {
+  get(k){ try { return localStorage.getItem(k); } catch(e) { return null; } },
+  set(k,v){ try { localStorage.setItem(k,v); } catch(e) {} }
+};
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* A verdict is dimension-specific: correctness is the wrong lens on a refusal
+   case, and a conflict case is scored on the rubric rather than on the answer. */
+function verdict(arm, kase){
+  if (arm.category === "unparseable") return {tone:"null", label:"no answer parsed"};
+  if (kase.dimension === "refusal"){
+    const answerable = kase.answer !== null;
+    const refused = arm.category === "refusal";
+    if (answerable) return refused ? {tone:"bad", label:"refused an answerable case"}
+                                   : (arm.answer_correct === false ? {tone:"bad", label:"answered, incorrect"}
+                                                                   : {tone:"ok", label:"answered correctly"});
+    return refused ? {tone:"ok", label:"abstained"} : {tone:"bad", label:"answered anyway"};
+  }
+  if (kase.dimension === "conflict"){
+    const c = arm.crs;
+    if (c == null) return {tone:"null", label:"not scored"};
+    const tone = c >= 3 ? "ok" : (c >= 1 ? "hold" : "bad");
+    return {tone, label:"CRS " + c};
+  }
+  if (arm.answer_correct === true) return {tone:"ok", label:"correct"};
+  if (arm.answer_correct === false) return {tone:"bad", label:"incorrect"};
+  return {tone:"hold", label:"abstained"};
+}
+
+function shortAnswer(a){
+  if (a == null) return null;
+  return a.length > 320 ? a.slice(0,319) + "…" : a;
+}
+
+/* ---------- masthead figures, counted from the data on the page ---------- */
+function renderStats(){
+  const nCases = DATA.cases.length;
+  const nArms = DATA.cases.reduce((n,c) => n + c.arms.length, 0);
+  const dims = new Set(DATA.cases.map(c => c.dimension));
+  const rows = [
+    [nCases, "cases"], [nArms, "responses"], [dims.size, "dimensions"],
+    [Object.keys(DATA.generators).length, "generator arms"]
+  ];
+  document.getElementById("stats").innerHTML = rows
+    .map(([v,k]) => `<div class="stat"><b>${v}</b><span>${k}</span></div>`).join("");
+}
+
+/* ---------- rail ---------- */
+function renderRail(){
+  const order = ["refusal","conflict","noise"];
+  const groups = order.map(d => [d, DATA.cases.filter(c => c.dimension === d)]).filter(g => g[1].length);
+  document.getElementById("rail").innerHTML = groups.map(([dim, cases]) => `
+    <section class="rail-group">
+      <span class="eyebrow">${esc(DIMENSIONS[dim].rq)}</span>
+      <p class="gloss">${esc(DIMENSIONS[dim].gloss)}</p>
+      ${cases.map(c => `
+        <button class="case-btn" data-case="${esc(c.case_id)}" aria-current="false">
+          <span class="cid">${esc(c.case_id)}</span>
+          <span class="cq">${esc(c.query)}</span>
+          <span class="strip">${stripFor(c)}</span>
+        </button>`).join("")}
+    </section>`).join("");
+
+  document.querySelectorAll(".case-btn").forEach(b =>
+    b.addEventListener("click", () => select(b.dataset.case, {scroll:true})));
+}
+
+function stripFor(kase){
+  const cells = DATA.configs.map((cfg,i) => {
+    const arm = kase.arms.find(a => a.config_id === cfg);
+    const tone = arm ? verdict(arm, kase).tone : "null";
+    const sep = i === 3 ? '<i class="gap"></i>' : "";
+    return sep + `<i data-tone="${tone}"></i>`;
+  }).join("");
+  return cells;
+}
+
+/* ---------- stage ---------- */
+function select(caseId, {scroll = false} = {}){
+  const kase = DATA.cases.find(c => c.case_id === caseId) || DATA.cases[0];
+  document.querySelectorAll(".case-btn").forEach(b =>
+    b.setAttribute("aria-current", String(b.dataset.case === kase.case_id)));
+  document.getElementById("stage").innerHTML = renderCase(kase);
+  wireStage();
+  store.set("casebook.case", kase.case_id);
+  // The fragment is the address of a case, so a link in an email or a slide
+  // opens on the case it names rather than on whatever was last viewed.
+  if (location.hash.slice(1) !== kase.case_id){
+    history.replaceState(null, "", "#" + kase.case_id);
+  }
+  // Only on a click, and only on the narrow layout where the stage sits below
+  // the rail. Scrolling on the initial render pushes the masthead off screen.
+  if (scroll && window.matchMedia("(max-width:900px)").matches){
+    document.getElementById("stage").scrollIntoView({block:"start", behavior:"smooth"});
+  }
+}
+
+function renderCase(k){
+  const ratio = k.noise_ratio == null ? "" :
+    `<span class="chip">noise ratio ${k.noise_ratio.toFixed(2)}</span>`;
+  const gold = k.answer == null
+    ? `<span class="v none">none — the evidence does not support an answer</span>`
+    : `<span class="v">${esc(k.answer)}</span>`;
+  return `
+  <div class="case-head">
+    <div class="chips">
+      <span class="chip solid">${esc(DIMENSIONS[k.dimension].rq)}</span>
+      <span class="chip">${esc(k.case_id)}</span>
+      <span class="chip">${esc(k.perturbation.replace(/_/g," "))}</span>
+      ${ratio}
+      <span class="chip">${k.seed_source === "trivia_qa" ? "TriviaQA" : "Natural Questions"}</span>
+    </div>
+    <h2 class="question">${esc(k.query)}</h2>
+    <p class="gold"><span class="k">Gold answer</span>${gold}</p>
+    <p class="why">${esc(k.why)}</p>
+  </div>
+
+  <section class="sec">
+    <h2>Evidence in the sandbox</h2>
+    <p class="lede">${k.passages.length} passage${k.passages.length === 1 ? "" : "s"} — the only
+    text any pipeline could reach for this case, plus a distractor pool drawn from the benchmark
+    that agentic re-retrieval may also see. Nothing outside it is retrievable.</p>
+    ${k.diff ? renderDiff(k.diff) : ""}
+    ${k.passages.map(p => renderPassage(p, k)).join("")}
+  </section>
+
+  <section class="sec">
+    <h2>How six configurations answered</h2>
+    <p class="lede">Down a column, the base model is fixed and only orchestration changes.
+    Across a row, the orchestration is fixed and only the model changes.</p>
+    ${renderMatrix(k)}
+  </section>`;
+}
+
+function renderDiff(d){
+  const [a,b] = markDifference(d.original, d.injected);
+  return `<div class="diff">
+    <div class="diff-row a"><span class="diff-k">Original</span><span class="diff-v">${a}</span></div>
+    <div class="diff-row b"><span class="diff-k">Injected</span><span class="diff-v">${b}</span></div>
+  </div>`;
+}
+
+/* Highlight the span that actually changed: the two sentences are otherwise
+   identical, and the whole point of the case is that one claim moved. */
+function markDifference(a, b){
+  const wa = a.split(/(\s+)/), wb = b.split(/(\s+)/);
+  let s = 0;
+  while (s < wa.length && s < wb.length && wa[s] === wb[s]) s++;
+  let ea = wa.length, eb = wb.length;
+  while (ea > s && eb > s && wa[ea-1] === wb[eb-1]) { ea--; eb--; }
+  const wrap = (words, from, to) =>
+    esc(words.slice(0,from).join("")) +
+    (to > from ? "<mark>" + esc(words.slice(from,to).join("")) + "</mark>" : "") +
+    esc(words.slice(to).join(""));
+  return [wrap(wa,s,ea), wrap(wb,s,eb)];
+}
+
+function renderPassage(p, kase){
+  const injectedLabel = kase.dimension === "conflict" ? "injected contradiction"
+                      : kase.dimension === "noise" ? "injected distractor"
+                      : "injected";
+  const tag = p.answer_bearing ? ["answer","answer-bearing"]
+            : p.injected ? ["injected", injectedLabel]
+            : ["context","context"];
+  return `<article class="passage">
+    <div class="passage-bar">
+      <span class="pid">${esc(p.passage_id)}</span>
+      <span class="tag ${tag[0]}">${tag[1]}</span>
+      <span class="pid">${p.tokens} tokens</span>
+    </div>
+    <div class="passage-body">${esc(p.text)}</div>
+    <button class="more" type="button">Show the full passage</button>
+  </article>`;
+}
+
+function renderMatrix(k){
+  const arms = ["1","2"];
+  const cols = arms.map(n => {
+    const key = "standard_" + n;
+    const g = DATA.generators[key] || {};
+    return `<div class="mx-colhead"><b>${esc(g.model || ("arm " + n))}</b>
+      <span>generator ${n}${g.family ? " · " + esc(g.family) : ""}</span></div>`;
+  }).join("");
+
+  const rows = ["naive","reasoning","agentic"].map(pc => {
+    const cells = arms.map(n => {
+      const cfg = DATA.configs.find(c => c.startsWith(pc + "|") && c.endsWith("_" + n));
+      const arm = k.arms.find(a => a.config_id === cfg);
+      return arm ? renderArm(arm, k) : `<div class="arm"><span class="pill" data-tone="null">no record</span></div>`;
+    }).join("");
+    return `<div class="mx-rowhead"><b>${CLASS_LABEL[pc]}</b>` +
+           `<span>${esc(CLASS_GLOSS[pc])}</span></div>${cells}`;
+  }).join("");
+
+  return `<div class="matrix"><div class="mx-corner"></div>${cols}${rows}</div>`;
+}
+
+function renderArm(a, k){
+  const v = verdict(a, k);
+  const ans = shortAnswer(a.final_answer);
+  const cls = ans == null ? "none" : (ans.trim() === "INSUFFICIENT EVIDENCE" ? "abstain" : "");
+  const body = ans == null ? "no answer field in the response" : esc(ans);
+  const rubric = (k.dimension === "conflict" && a.crs != null)
+    ? `<span style="color:var(--muted)">${esc(DATA.rubric[a.crs])}</span>` : "";
+  const subs = (a.steps || []).filter(s => s.node === "decompose")
+    .flatMap(s => s.subqueries || []);
+  const retr = (a.steps || []).filter(s => s.node === "retrieve").length;
+  return `<div class="arm" data-tone="${v.tone}">
+    <div class="arm-top">
+      <span class="pill" data-tone="${v.tone}">${esc(v.label)}</span>
+      ${a.truncated ? '<span class="pill" data-tone="hold">hit the output cap</span>' : ""}
+      ${a.recovery ? '<span class="pill" data-tone="null">answer recovered</span>' : ""}
+    </div>
+    <span class="arm-config">${esc(a.config_id)}</span>
+    <p class="arm-answer ${cls}">${body}</p>
+    ${rubric ? `<p style="font-size:11.5px">${rubric}</p>` : ""}
+    <p class="arm-meta"><span>${a.calls} generator call${a.calls === 1 ? "" : "s"}</span>${
+      retr ? `<span>${retr} re-retrieval${retr === 1 ? "" : "s"}</span>` : ""}</p>
+    ${subs.length ? `<ul class="substeps">${subs.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` : ""}
+    ${a.raw_text ? `<details><summary>Full response</summary><div class="raw">${esc(a.raw_text)}</div></details>` : ""}
+  </div>`;
+}
+
+function wireStage(){
+  document.querySelectorAll(".passage .more").forEach(btn => {
+    const body = btn.previousElementSibling;
+    if (body.scrollHeight <= body.clientHeight + 4){ btn.remove(); return; }
+    btn.addEventListener("click", () => {
+      const open = body.classList.toggle("open");
+      btn.textContent = open ? "Collapse" : "Show the full passage";
+    });
+  });
+}
+
+function initialCase(){
+  const fromHash = decodeURIComponent(location.hash.slice(1));
+  if (DATA.cases.some(c => c.case_id === fromHash)) return fromHash;
+  const remembered = store.get("casebook.case");
+  if (DATA.cases.some(c => c.case_id === remembered)) return remembered;
+  return DATA.cases[0].case_id;
+}
+
+renderStats();
+renderRail();
+select(initialCase());
+window.addEventListener("hashchange", () => select(initialCase()));
+</script>

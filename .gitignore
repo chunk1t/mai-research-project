@@ -1,0 +1,28 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Secrets. Never commit .env.
+.env
+.env.*
+!.env.example
+
+# Build artefacts
+*.egg-info/
+build/
+dist/
+
+# OS
+.DS_Store
+
+# Generated at build/run time. The directories are kept so the scripts have
+# somewhere to write; their contents are large and regenerable. Git cannot
+# re-include a file whose parent directory is excluded, hence the stepwise
+# negations rather than a single `!data/cases/.gitkeep`.
+data/*
+!data/cases/
+data/cases/*
+!data/cases/.gitkeep
+runs/

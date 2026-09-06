@@ -1,0 +1,175 @@
+# Model allocation for the P2 experiment.
+#
+# Anti-circularity constraint (P1 Section 5.9): the synthetic case generator,
+# the evaluated generators, and the CRS judge must be drawn from different
+# model families, with no family appearing in more than one role.
+#
+#   evaluated      -> {alibaba, zhipu}
+#   case_generator -> {google}
+#   crs_judge      -> {anthropic}
+#
+# These three role groups are disjoint. Verified by tests/test_config.py.
+
+providers:
+  modal_vllm:
+    kind: openai_compat
+    # Fallback only. Modal serves one model per web endpoint, so each generator
+    # overrides this with its own URL; see the base_url on each arm below.
+    base_url: ${MODAL_VLLM_URL_QWEN}
+    api_key_env: MODAL_VLLM_KEY
+    max_concurrency: 32
+  google_aistudio:
+    kind: google
+    base_url: https://generativelanguage.googleapis.com/v1beta
+    api_key_env: GOOGLE_API_KEY
+    max_concurrency: 2
+    # MEASURED 24 August 2026, not assumed. The Gemini FREE tier allows only
+    # 20 requests per day per model (quotaId
+    # GenerateRequestsPerDayPerProjectPerModel-FreeTier, quotaValue 20) -- not
+    # the 1,500 previously recorded here. The conflict build needs ~340 calls,
+    # so the free tier cannot construct the RQ2 testbed at all; the project
+    # runs the case generator on a BILLED key.
+    #
+    # This limiter value is the paid-tier safety net, deliberately well below
+    # the real paid ceiling so a runaway loop trips it before it spends money.
+    # It is not a discovered limit: treat a 429 as the authority, not this
+    # number. The earlier 1,500 was a guess and it cost a stalled build.
+    requests_per_day: 1500
+  anthropic:
+    kind: anthropic
+    api_key_env: ANTHROPIC_API_KEY
+    max_concurrency: 4
+
+# Evaluated generators. Self-hosted on Modal because the 69,600-call workload
+# cannot fit the USD 20 budget on hosted APIs.
+generators:
+  standard_1:
+    provider: modal_vllm
+    base_url: ${MODAL_VLLM_URL_QWEN}
+    model: Qwen/Qwen3-8B
+    family: alibaba
+    thinking: false
+    # Qwen3 defaults to thinking ON, so the standard arm must explicitly send
+    # enable_thinking=false. Declaring toggle support per CHECKPOINT (not per
+    # arm) is what keeps standard_1 and reasoning_1 the same weights differing
+    # only in the reasoning variable (HANDOFF decision 2, P1 5.6.2).
+    supports_thinking: true
+  standard_2:
+    provider: modal_vllm
+    base_url: ${MODAL_VLLM_URL_GLM}
+    model: THUDM/glm-4-9b-chat
+    family: zhipu
+    thinking: false
+  reasoning_1:
+    provider: modal_vllm
+    base_url: ${MODAL_VLLM_URL_QWEN}
+    model: Qwen/Qwen3-8B
+    family: alibaba
+    thinking: true          # reasoning-trained form (P1 5.6.2)
+    supports_thinking: true
+  reasoning_2:
+    provider: modal_vllm
+    base_url: ${MODAL_VLLM_URL_GLM}
+    model: THUDM/glm-4-9b-chat
+    family: zhipu
+    thinking: false
+    cot_prompt: true        # chain-of-thought prompted form (P1 5.6.2)
+
+# Agentic generators must be a subset of the reasoning set (P1 Section 5.6.3).
+agentic_generators: [reasoning_1, reasoning_2]
+
+# Distinct-family roles. Small volume, paid from the USD 20 budget.
+case_generator:
+  provider: google_aistudio
+  # Verified by a live generateContent call on this key, 24 August 2026 --
+  # NOT merely by presence in ListModels. `gemini-3.7-flash` is listed but does
+  # not serve: it hangs for ~4 minutes and returns 503 UNAVAILABLE ("high
+  # demand"). Since 503 is a transient status the retry policy retries it, so a
+  # listed-but-dead model costs ~16 minutes per seed and would have stalled the
+  # whole build silently. `gemini-3-flash` (an earlier guess) never existed at
+  # all. Hence the preflight in scripts/build_dataset.py: availability is
+  # established by calling the model, not by reading the catalogue.
+  #
+  # 3.6-flash over the also-working 3.5-flash: newer, and 11.8s vs 19.0s on the
+  # real contradiction prompt, which is ~1 hour across the 320-seed build.
+  #
+  # Deliberately a pinned stable id rather than `gemini-flash-latest`: P1 5.6.5
+  # requires recording the version of each model, and a floating alias would
+  # silently change what generated the cases partway through a build, leaving
+  # the testbed provenance unreportable.
+  model: gemini-3.6-flash
+  family: google
+
+ragas_judge:
+  provider: google_aistudio
+  # Pinned for the same reason as the case generator. The RAGAS secondary
+  # analysis has not run yet, so this id is listed-but-unexercised; confirm it
+  # with a live call before build item 7 rather than trusting the listing.
+  model: gemini-3.5-flash-lite
+  family: google
+crs_judge:
+  provider: anthropic
+  model: claude-haiku-4-5-20251001
+  family: anthropic
+
+# Language-model fallback for the 3-way response classifier (P1 Section 5.6.4).
+# It decides whether an evaluated generator refused, so it must not share a
+# family with the evaluated generators: a same-family classifier could
+# systematically read its sibling's phrasing as commitment. Shares the anthropic
+# family with the CRS judge, which is safe because the two act on different
+# dimensions -- this one on RQ1 refusal, the judge on RQ2 conflict -- so no
+# single metric depends on two anthropic judgements.
+refusal_classifier:
+  provider: anthropic
+  model: claude-haiku-4-5-20251001
+  family: anthropic
+
+# Held constant across all configurations (P1 Section 5.6.5).
+controls:
+  # Retrieval policy. P1 5.4.1 defines the noise dimension over "the proportion
+  # of irrelevant passages in the retrieved context", so the ratio is a property
+  # of what the generator actually sees. Truncating a 23-passage r=0.90 case to
+  # the top 5 would deliver 0.625 instead, collapsing the r=0.75 and r=0.90
+  # points and making A(r) measure something other than r.
+  #
+  # So the initial retrieval ranks the case's full constructed set: the
+  # retriever fixes the ORDER, never the membership. Retrieval still genuinely
+  # runs (P1 5.6.1) and BM25 vs DPR stays a real experimental variable.
+  initial_retrieval: rank_full_case_set
+  # top_k governs agentic RE-retrieval only, which is the case P1 5.6.5 is
+  # written about ("even when a pipeline issues additional retrievals"). Fixed
+  # across configurations so cost and latency stay comparable.
+  top_k: 5
+  max_context_tokens: 8192
+  # Held constant across ALL pipeline classes. P1 5.6.5 lists "the generation
+  # temperature and other decoding parameters" among the variables held
+  # constant, and max_tokens is a decoding parameter: the pipeline defaults had
+  # drifted to 1024 for naive and 2048 for reasoning and agentic, so the naive
+  # arm ran on half the reasoning arm's output budget and the comparison
+  # between classes was confounded.
+  #
+  # 4096 rather than 2048 because a reasoning-mode synthesis call was observed
+  # exhausting 2048 tokens *inside its thinking block*: no closing tag, no
+  # <final_answer>, and a null answer for a case the model had already solved
+  # ("it says Mornay sauce is Bechamel..."). Null answers concentrated in the
+  # agentic arm would read as "agentic does not help" -- the study's central
+  # question -- for a purely artefactual reason.
+  #
+  # 8192 + 4096 = 12288, exactly the max_model_len served by deploy/modal_vllm.py,
+  # so the largest permitted context still leaves the full output budget.
+  # 8192, raised from 4096 after the twelve-configuration validation run showed
+  # truncation causing EVERY null answer on the Qwen reasoning arm: 5 nulls, 5
+  # truncations, the same 5 instances, i.e. 27% of that arm returning nothing
+  # because thinking exhausted the budget before emitting <final_answer>.
+  # Nulls concentrated in the reasoning arms make "does reasoning help?" a
+  # measurement of the token cap rather than of reasoning.
+  #
+  # Bounded by the largest prompt, since P1 5.6.5 holds decoding parameters
+  # constant so one budget must serve every case:
+  #   20480 window - 10574 largest prompt - ~350 template = 9556 available
+  max_output_tokens: 6144
+  temperature: 0.0
+  max_agentic_steps: 5
+  seed: 20260721
+
+retrievers: [bm25, dpr]

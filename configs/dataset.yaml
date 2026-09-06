@@ -1,0 +1,129 @@
+# Benchmark composition (P1 Section 5.6.5).
+# 200 refusal + 200 conflict + 500 noise = 900 base cases
+# Noise expands x5 ratios, giving 2,900 evaluation instances per configuration.
+
+seeds:
+  natural_questions: 300
+  trivia_qa: 300
+  filters:
+    drop_ambiguous_answers: true
+    drop_multi_answer: true
+    min_evidence_tokens: 50
+    # RESOLVED 18 August: tightened from 2000 to 800.
+    #
+    # A noise case at ratio r holds signal/(1-r) tokens in total, so r=0.90
+    # carries ten times the signal. At 2000 that is 20,000 tokens against the
+    # max_context_tokens=8192 control in models.yaml, and the largest seeds
+    # could not fit their own r=0.90 case. 10 x 800 = 8,000 sits just inside
+    # the control at every ratio.
+    #
+    # P1 5.5.1 already sanctions filtering "evidence documents that are
+    # extremely long or short", so this is a tighter threshold within the
+    # specified filter rather than a new one. The alternative was raising
+    # max_context_tokens to 32768, which both served models support but which
+    # multiplies prefill cost across 2,500 noise instances x 12 configs --
+    # the wrong trade when GPU throughput is the binding deadline constraint.
+    #
+    # CONSEQUENCE for build item 5: the TriviaQA loader currently takes three
+    # contexts of 2,500 characters (~1,290 tokens), so it would now be rejected
+    # wholesale. Prepare evidence to fit rather than filtering it out -- take
+    # fewer contexts per seed -- or seed yield collapses.
+    max_evidence_tokens: 800
+
+testbeds:
+  refusal:
+    unanswerable: 100
+    answerable_control: 100
+    # Replacement passage must be topically near but must not support the answer.
+    similarity_floor: 0.45
+    similarity_ceiling: 0.80
+  conflict:
+    n_cases: 200
+    nli_model: MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli
+    contradiction_threshold: 0.70
+  noise:
+    n_cases: 500
+    ratios: [0.0, 0.25, 0.50, 0.75, 0.90]
+    # RESOLVED 25 August, after every sampled noise case failed P1 5.5.3's
+    # "distractors are topically related" review.
+    #
+    # Three defects compounded, and the floor was the least of them:
+    #   1. The corpus held one passage per topic (674 across 591 seeds), so no
+    #      seed HAD a topical neighbour. Raising the floor emptied pools instead
+    #      of improving them. Seeds now also carry same-article windows.
+    #   2. Similarity was computed over raw Wikipedia markup, so the "nearest
+    #      neighbours" of a Virgin Australia passage were a music chart and a
+    #      poker table -- matching runs of <Td></Tr>, not topic. Embeddings are
+    #      now taken over stripped text (the served passage is unchanged).
+    #   3. The pool was shuffled and drawn from at random, so a 481-candidate
+    #      pool sampled mostly its weakest tail. Selection is now nearest-first,
+    #      which is what P1 5.5.2's "topically nearest neighbours" asks for.
+    #
+    # Measured on the rebuilt corpus: at floor 0.50 with a 12-passage pool, no
+    # seed has an empty pool and none is short of the tokens r=0.90 needs
+    # (median 8,164 available against 6,300 required); the 12th-nearest
+    # neighbour sits at a median cosine of 0.619. A 0.55 floor is strictly
+    # worse -- it starves 39 seeds at r=0.90 and empties one pool outright.
+    distractor_similarity_floor: 0.50
+    # Nearest neighbours retained per seed. Sized to fund r=0.90, which needs
+    # nine distractor tokens per signal token; a larger pool only admits
+    # weaker matches, since quality falls off past the same-article neighbours.
+    distractor_pool_size: 12
+
+validation:
+  sample_fraction: 0.175        # P1 commits to 15-20 percent
+  second_annotator_cases: 50
+  crs_human_rating_cases: 100
+  kappa_threshold: 0.60
+
+embedding_model: BAAI/bge-base-en-v1.5
+
+# Analysis parameters (P1 Section 5.7).
+#
+# The practical-significance thresholds are DECLARED HERE BEFORE THE ANALYSIS
+# RUNS, because P1 requires the threshold to be "set in advance at a
+# metric-specific level" -- a threshold chosen after seeing the results is not a
+# threshold, it is a conclusion. Confirmed by the user on 26 August 2026; the
+# commit that adds this block predates the first analysis run.
+#
+# A difference between pipeline classes is reported as PRACTICALLY significant
+# only when it exceeds the value below AND its bootstrap confidence interval
+# excludes zero. The two tests answer different questions: the interval says the
+# difference is real, the threshold says it is large enough to matter.
+analysis:
+  n_bootstrap: 1000        # P1: "at least one thousand resamples"
+  confidence: 0.95
+  rng_seed: 20260721       # determinism, as P1 5.6.5 requires of every stage
+  practical_significance:
+    refusal_f1: 0.05       # five points of F1
+    crs: 0.25              # a quarter of one level on the 0-4 rubric
+    ndc_auc: 0.05          # five points of normalised area
+
+# RAGAS secondary analysis (P1 Section 5.7).
+#
+# DECLARED BEFORE THE ANALYSIS RUNS, for the same reason as the practical
+# significance thresholds above: this analysis makes a claim about how often
+# another framework misses a failure, and a "passing" cut-off chosen after
+# seeing where RAGAS's scores landed would let the miss rate be dialled to
+# whatever the chapter wanted.
+ragas:
+  # Stratified by dimension x pipeline class -- 3 x 3 = 9 strata. P1 5.7 asks
+  # for "a held-out subset"; the size is set by what the coverage-gap counts
+  # need, since a miss rate computed over a handful of failures per cell is not
+  # reportable.
+  instances_per_stratum: 50
+  # Es et al. (2024) generate several candidate questions from the answer and
+  # average the similarities; a single question would make answer relevance a
+  # sample of one.
+  n_generated_questions: 3
+  # A RAGAS score at or above this counts as "RAGAS considers this instance
+  # acceptable". 0.5 is the midpoint of the [0,1] range the three metrics share
+  # and is not tuned; the mean-on-failures/mean-on-successes separation is
+  # reported alongside so the finding does not rest on the cut-off alone.
+  pass_threshold: 0.5
+  rng_seed: 20260721
+  # Held out from BOTH human-labelled samples. A case that calibrated the CRS
+  # judge or passed manual review has already informed the purpose-built side
+  # of this comparison, and reusing it here would let the two sides share an
+  # error rather than being compared.
+  exclude_validation_cases: true
