@@ -5,10 +5,16 @@ and agentic pipelines. Implementation for Research Project Phase 2 (WQF7023).
 
 Lee Chun Kit (23076218), Universiti Malaya.
 
-**This repository is the source code only.** The benchmark data, the run
-artefacts, the report and the presentation are not included: they are large,
-regenerable or not code. What is here is everything needed to read, test and
-understand the implementation.
+**This repository ships the code and the frozen benchmark**, so the report can
+be read against the evidence it was written from. `data/cases/benchmark.jsonl`
+is the 2,858-case benchmark that was evaluated, `runs/` holds the artefacts
+every cited number is read from, and `docs/` carries the reproducibility
+appendix and the ledger tying each reported number to its artefact.
+
+What is deliberately absent is the regenerable bulk: the raw generations
+(~102 MB), the response cache, the seed corpora, the figures (they regenerate,
+see below), and the intermediate files from superseded runs. The report and
+presentation PDFs sit in the folder above this one.
 
 ## Quick start
 
@@ -17,7 +23,7 @@ pip install -e ".[dev]"
 pytest -q
 ```
 
-No API keys, no network, no downloads. Expect **376 passed, 1 skipped**.
+No API keys, no network, no downloads. Expect **377 passed**.
 
 ## What runs here, and what does not
 
@@ -28,17 +34,77 @@ specification rather than a snapshot.
 The pipeline entry points in `scripts/` are included because they are the code
 under review, but they need artefacts this repository does not ship:
 
-| Script | Needs |
+| Script | Status here |
 |---|---|
-| `run_experiment.py`, `score_results.py`, `analyse_results.py` | a built benchmark and live model endpoints |
-| `demo.py`, `build_demo_data.py` | `data/cases/benchmark.jsonl` and the response cache |
-| `verify_pack.py` | the writing pack, which is report material and not shipped here |
+| `verify_pack.py` | **runs** — re-checks all 66 cited numbers, no arguments needed |
+| `analyse_results.py` | **runs** — regenerates `runs/analysis.json` and the figures from the shipped `runs/scored.jsonl` |
+| `smoke_build.py` | **runs** — builds all three testbeds end to end on mock seeds, no network |
+| `run_experiment.py`, `score_results.py` | needs live model endpoints |
+| `build_demo_data.py` | rebuilds `demo/index.html`; the built casebook already ships |
+| `demo.py` | **runs** — replays the study offline from the shipped cache; no GPU, API key or network |
 
-`tests/test_demo.py` skips its end-to-end check for the same reason. The skip is
-a guard, not a failure.
+`tests/test_demo.py` runs its end-to-end check against the shipped cache.
 
-`python scripts/smoke_build.py` does run standalone: it builds the three
-testbeds end to end on mock seeds, with no network.
+## Verifying the frozen benchmark
+
+The report identifies the evaluated benchmark by `content_hash 903392537ebef4de`.
+That hash is a SHA-256 over each case's query, passage texts, answer and noise
+ratio (`schema.Benchmark.manifest`), so it can be recomputed from the shipped
+file rather than taken on trust:
+
+```bash
+python - <<'EOF'
+import hashlib
+from ragrobust.schema import TestCase
+cases = [TestCase.model_validate_json(line)
+         for line in open("data/cases/benchmark.jsonl", encoding="utf-8")]
+print(len(cases), hashlib.sha256(
+    "".join(sorted(c.content_hash() for c in cases)).encode()).hexdigest()[:16])
+EOF
+# 2858 903392537ebef4de  -- matching data/cases/manifest.json
+```
+
+Every figure quoted in the report is machine-checked against the artefact it was
+read from:
+
+```bash
+python scripts/verify_pack.py
+# checked 66 of 66 ledger rows against their artefacts
+# checked 3 'N of nine' prose claims against runs/analysis.json
+# all ledger values match their artefacts
+```
+
+`docs/NUMBERS_LEDGER.md` is the ledger it reads: one row per cited number,
+naming the artefact and the JSON path that number comes from, so a reviewer can
+also follow any single figure back by hand.
+
+The analysis itself reproduces from the shipped per-instance scores:
+
+```bash
+python scripts/analyse_results.py       # runs/scored.jsonl -> runs/analysis.json + runs/figures/
+```
+
+This rewrites `runs/analysis.json` byte-identically and regenerates all ten
+report figures into `runs/figures/`. The figures are not shipped, because this
+command reproduces them from the shipped scores.
+
+### Where the evidence lives
+
+| Path | What it holds |
+|---|---|
+| `data/cases/benchmark.jsonl` | the 2,858 frozen cases: 200 refusal, 198 conflict, 2,460 noise |
+| `data/cases/manifest.json` | case counts and the content hash |
+| `runs/benchmark_manifest.json` | the same hash as run, plus the stale-review case ids |
+| `runs/scored.jsonl` | per-instance scores for all twelve pipeline x retriever x model configurations |
+| `runs/scores.json`, `runs/analysis.json` | aggregate metrics and the paired comparisons |
+| `runs/ragas_analysis.json`, `runs/ragas_scores.jsonl` | the RAGAS convergent-validity check |
+| `runs/generation_artefacts.json`, `runs/discard_report.json` | what the case build produced and rejected |
+| `runs/validation/` | human annotation: primary and second-annotator labels, CRS judge agreement, review sheets |
+| `docs/REPRODUCIBILITY.md` | environment, seeds, model versions, and the full rebuild-from-scratch sequence |
+| `docs/NUMBERS_LEDGER.md` | all 66 reported numbers, each mapped to its artefact and JSON path |
+
+The human annotation files carry no annotator identifiers — only case ids,
+labels and free-text notes.
 
 ## Layout
 
@@ -51,10 +117,13 @@ src/ragrobust/       the library
   providers/         model clients, response cache, replay provider
   corpus.py          the per-case sandboxed corpus (the central control)
 scripts/             entry points for building, running, scoring, analysing
-tests/               376 tests, hand-computed expectations
+tests/               377 tests, hand-computed expectations
 configs/             models.yaml and dataset.yaml — all model and threshold choices
 deploy/              Modal vLLM serving script
 demo/                self-contained offline casebook; open index.html directly
+data/cases/          the frozen benchmark and its manifest
+runs/                result artefacts, per-instance scores, human validation
+docs/                reproducibility appendix and the numbers ledger
 ```
 
 Every model choice and every threshold lives in `configs/`, never in code.

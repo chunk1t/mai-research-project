@@ -1,0 +1,35 @@
+{
+  "cohens_kappa": 0.8258,
+  "quadratic_weighted_kappa": 0.9565,
+  "n_cases": 100,
+  "observed_agreement": 0.98,
+  "exact_matches": 98,
+  "within_one_level": 100,
+  "judge_distribution": {
+    "0": 95,
+    "1": 3,
+    "2": 1,
+    "4": 1
+  },
+  "human_distribution": {
+    "0": 93,
+    "1": 5,
+    "2": 1,
+    "4": 1
+  },
+  "meets_p1_gate": true,
+  "p1_threshold": 0.6,
+  "paradox_diagnostics": {
+    "cohens_kappa": 0.8258,
+    "observed_agreement": 0.98,
+    "expected_agreement": 0.8852,
+    "n_items": 100,
+    "n_categories": 4,
+    "gwet_ac1": 0.9792,
+    "pabak": null,
+    "prevalence_index": null,
+    "bias_index": null,
+    "kappa_paradox_detected": false
+  },
+  "unrated_items_excluded": 0
+}

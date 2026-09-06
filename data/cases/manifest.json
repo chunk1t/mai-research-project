@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "n_cases": 2858,
+  "counts_by_dimension": {
+    "refusal": 200,
+    "conflict": 198,
+    "noise": 2460
+  },
+  "n_answerable": 2758,
+  "content_hash": "903392537ebef4de",
+  "seed_overlap_between_dimensions": {
+    "conflict&noise": 166,
+    "conflict&refusal": 74,
+    "noise&refusal": 175
+  },
+  "evaluation_instances": 2858
+}

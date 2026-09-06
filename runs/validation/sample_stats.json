@@ -1,0 +1,20 @@
+{
+  "base_cases_total": 890,
+  "sampling_unit": "base_case",
+  "fraction_requested": 0.175,
+  "fraction_achieved": 0.1753,
+  "primary_n": 156,
+  "primary_by_dimension": {
+    "conflict": 35,
+    "noise": 86,
+    "refusal": 35
+  },
+  "second_annotator_n": 50,
+  "second_annotator_by_dimension": {
+    "conflict": 11,
+    "noise": 28,
+    "refusal": 11
+  },
+  "rng_seed": 20260721,
+  "zero_noise_excluded": true
+}

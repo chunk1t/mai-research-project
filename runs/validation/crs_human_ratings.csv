@@ -1,0 +1,101 @@
+item,case_id,config_id,your_score_0_to_4,notes
+1,conflict-nq-1337,agentic|bm25|reasoning_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+2,conflict-nq-3133,agentic|bm25|reasoning_1,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+3,conflict-nq-4760,agentic|bm25|reasoning_1,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+4,conflict-tqa-2496,agentic|bm25|reasoning_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+5,conflict-tqa-5077,agentic|bm25|reasoning_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+6,conflict-tqa-5868,agentic|bm25|reasoning_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+7,conflict-nq-4127,agentic|bm25|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+8,conflict-nq-4826,agentic|bm25|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+9,conflict-nq-5906,agentic|bm25|reasoning_2,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+10,conflict-tqa-2196,agentic|bm25|reasoning_2,1,Hedges between the two conflicting terms ('stower or quant') without stating that the passages disagree or attributing each to a source.
+11,conflict-tqa-3313,agentic|bm25|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+12,conflict-tqa-5490,agentic|bm25|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+13,conflict-tqa-5638,agentic|bm25|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+14,conflict-tqa-5840,agentic|bm25|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+15,conflict-tqa-5914,agentic|bm25|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+16,conflict-nq-5925,agentic|dpr|reasoning_1,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+17,conflict-nq-613,agentic|dpr|reasoning_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+18,conflict-tqa-2139,agentic|dpr|reasoning_1,4,"Explicit recognition, both named positions identified (Ron Atkinson vs Trevor Francis), and a clear rationale given for preferring passage 1."
+19,conflict-tqa-2419,agentic|dpr|reasoning_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+20,conflict-tqa-2972,agentic|dpr|reasoning_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+21,conflict-tqa-5207,agentic|dpr|reasoning_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+22,conflict-tqa-5914,agentic|dpr|reasoning_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+23,conflict-tqa-5943,agentic|dpr|reasoning_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+24,conflict-nq-4760,agentic|dpr|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+25,conflict-tqa-2419,agentic|dpr|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+26,conflict-tqa-3007,agentic|dpr|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+27,conflict-tqa-3111,agentic|dpr|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+28,conflict-tqa-3199,agentic|dpr|reasoning_2,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+29,conflict-tqa-3981,agentic|dpr|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+30,conflict-tqa-4227,agentic|dpr|reasoning_2,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+31,conflict-tqa-4512,agentic|dpr|reasoning_2,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+32,conflict-tqa-5800,agentic|dpr|reasoning_2,1,Names 'Disagreement' but does not identify what the two conflicting positions actually are.
+33,conflict-tqa-5868,agentic|dpr|reasoning_2,1,"Sidesteps the specific conflicting brand names (Hyundai vs Kia) with a vague generalization, without acknowledging the source conflict."
+34,conflict-tqa-5992,agentic|dpr|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+35,conflict-nq-5841,naive|bm25|standard_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+36,conflict-tqa-1122,naive|bm25|standard_1,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+37,conflict-tqa-1676,naive|bm25|standard_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+38,conflict-tqa-2419,naive|bm25|standard_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+39,conflict-tqa-3007,naive|bm25|standard_1,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+40,conflict-tqa-5210,naive|bm25|standard_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+41,conflict-tqa-5800,naive|bm25|standard_1,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+42,conflict-tqa-5943,naive|bm25|standard_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+43,conflict-nq-5264,naive|bm25|standard_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+44,conflict-nq-5841,naive|bm25|standard_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+45,conflict-tqa-2419,naive|bm25|standard_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+46,conflict-tqa-2972,naive|bm25|standard_2,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+47,conflict-tqa-4778,naive|bm25|standard_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+48,conflict-tqa-5364,naive|bm25|standard_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+49,conflict-tqa-5806,naive|bm25|standard_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+50,conflict-tqa-5864,naive|bm25|standard_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+51,conflict-tqa-665,naive|bm25|standard_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+52,conflict-nq-5852,naive|dpr|standard_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+53,conflict-nq-780,naive|dpr|standard_1,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+54,conflict-tqa-2421,naive|dpr|standard_1,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+55,conflict-tqa-2429,naive|dpr|standard_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+56,conflict-tqa-3253,naive|dpr|standard_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+57,conflict-tqa-3655,naive|dpr|standard_1,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+58,conflict-tqa-4064,naive|dpr|standard_1,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+59,conflict-tqa-5539,naive|dpr|standard_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+60,conflict-tqa-5709,naive|dpr|standard_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+61,conflict-tqa-5899,naive|dpr|standard_1,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+62,conflict-nq-1285,naive|dpr|standard_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+63,conflict-tqa-2127,naive|dpr|standard_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+64,conflict-tqa-2139,naive|dpr|standard_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+65,conflict-tqa-313,naive|dpr|standard_2,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+66,conflict-tqa-5067,naive|dpr|standard_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+67,conflict-tqa-5364,naive|dpr|standard_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+68,conflict-nq-2044,reasoning|bm25|reasoning_1,0,No answer produced; conflict not addressed at all.
+69,conflict-nq-2585,reasoning|bm25|reasoning_1,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+70,conflict-nq-5952,reasoning|bm25|reasoning_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+71,conflict-nq-795,reasoning|bm25|reasoning_1,0,No answer produced; conflict not addressed at all.
+72,conflict-tqa-1676,reasoning|bm25|reasoning_1,0,No answer produced; conflict not addressed at all.
+73,conflict-tqa-2298,reasoning|bm25|reasoning_1,0,No answer produced; conflict not addressed at all.
+74,conflict-tqa-2961,reasoning|bm25|reasoning_1,0,No answer produced; conflict not addressed at all.
+75,conflict-tqa-4109,reasoning|bm25|reasoning_1,0,No answer produced; conflict not addressed at all.
+76,conflict-nq-3225,reasoning|bm25|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+77,conflict-nq-4037,reasoning|bm25|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+78,conflict-nq-4643,reasoning|bm25|reasoning_2,2,"Explicit recognition of the conflict and both dated positions identified (Passage 1: 31 Mar 2018, Passage 2: 30 Nov 2017), but no resolution or deferral offered."
+79,conflict-tqa-1122,reasoning|bm25|reasoning_2,1,States there is disagreement between passages but does not identify the two positions.
+80,conflict-tqa-1641,reasoning|bm25|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+81,conflict-tqa-2298,reasoning|bm25|reasoning_2,1,States there is disagreement in passages but does not identify the two positions.
+82,conflict-tqa-3111,reasoning|bm25|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+83,conflict-tqa-3199,reasoning|bm25|reasoning_2,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+84,conflict-tqa-665,reasoning|bm25|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+85,conflict-nq-1810,reasoning|dpr|reasoning_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+86,conflict-nq-2375,reasoning|dpr|reasoning_1,0,No answer produced; conflict not addressed at all.
+87,conflict-nq-2611,reasoning|dpr|reasoning_1,0,No answer produced; conflict not addressed at all.
+88,conflict-nq-4038,reasoning|dpr|reasoning_1,0,No answer produced; conflict not addressed at all.
+89,conflict-nq-5700,reasoning|dpr|reasoning_1,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.
+90,conflict-nq-985,reasoning|dpr|reasoning_1,0,No answer produced; conflict not addressed at all.
+91,conflict-tqa-1220,reasoning|dpr|reasoning_1,0,No answer produced; conflict not addressed at all.
+92,conflict-tqa-2736,reasoning|dpr|reasoning_1,0,No answer produced; conflict not addressed at all.
+93,conflict-tqa-3533,reasoning|dpr|reasoning_1,0,No answer produced; conflict not addressed at all.
+94,conflict-tqa-4112,reasoning|dpr|reasoning_1,0,No answer produced; conflict not addressed at all.
+95,conflict-tqa-4211,reasoning|dpr|reasoning_1,0,No answer produced; conflict not addressed at all.
+96,conflict-tqa-5297,reasoning|dpr|reasoning_1,0,No answer produced; conflict not addressed at all.
+97,conflict-tqa-5943,reasoning|dpr|reasoning_1,0,No answer produced; conflict not addressed at all.
+98,conflict-nq-2428,reasoning|dpr|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+99,conflict-nq-4037,reasoning|dpr|reasoning_2,0,Gives a single confident answer with no acknowledgment that the two passages disagree on a key fact.
+100,conflict-tqa-3533,reasoning|dpr|reasoning_2,0,Generic 'insufficient evidence' refusal with no indication it recognized the passages disagree; ignores the conflict.

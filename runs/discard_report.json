@@ -1,0 +1,96 @@
+{
+  "reason": "answer-bearing passage does not assert the gold answer on a word boundary, OR a human annotator failed the case on a P1 5.5.3 checklist question (repair-or-discard)",
+  "counts": {
+    "refusal": {
+      "before": 200,
+      "after": 200,
+      "discarded": 0
+    },
+    "conflict": {
+      "before": 198,
+      "after": 198,
+      "discarded": 0
+    },
+    "noise": {
+      "before": 2500,
+      "after": 2460,
+      "discarded": 40
+    }
+  },
+  "manual_review_failures": {
+    "conflict-nq-803": [
+      "The contradiction is plausible (not absurd). [The rewrite produces 'the Catholic Church of Sweden' (twice) -- a self-contradictory compound name, since 'Church of Sweden' is definitionally the Lutheran state church. This isn't just a historically implausible claim, it's an internally incoherent phrase no real source would produce.]"
+    ],
+    "noise-nq-1148-r75": [
+      "The distractor passages do not contain the answer. [Gold is 'Anakin Skywalker'. Distractor dist-nq-1148-x3 says 'a Force Ghost of Anakin' and names the actor 'who played Anakin', in a passage about Vader's unmasking -- the answer is recoverable from the distractor.]"
+    ],
+    "noise-nq-1285-r90": [
+      "The distractor passages are topically related to the query. ['Lunar flag assembly' and 'Lurgan, County Armagh' - alphabetical neighbours of Lupus, not topical ones]",
+      "The distractor passages are topically related to the query. [Distractors are dominated by alphabetical neighbours of 'Lupus' rather than topical ones -- 'Lunar flag assembly', 'Lurgan, County Armagh' -- plus Ford tax cuts, Parkinson's disease and a fragrance launch. Not topically related to the Lupus Foundation's founding.]"
+    ],
+    "noise-nq-3340-r90": [
+      "The distractor passages do not contain the answer. [Gold is 'Wembley Stadium'. Three distractors state that International Series games 'take place at Wembley' and that the NFL 'extends deal to play games at Wembley'. The venue is stated outright.]"
+    ],
+    "noise-nq-3438-r90": [
+      "The distractor passages are topically related to the query. [Apollonius of Perga (geometry) and potassium zirconium fluoride (chemistry); nothing about pottery]",
+      "The distractor passages are topically related to the query. [Six of ten distractors are off-topic for a pottery question: Apollonius of Perga (conic sections), zirconium production, Inca architecture, punting, Greek mathematics, spin in ball sports. Only four concern pottery.]"
+    ],
+    "noise-nq-5528-r75": [
+      "The distractor passages do not contain the answer. [Gold is 'Leonardo da Vinci'. Distractor dist-nq-5528-x0 discusses the same painting's deterioration and refers to 'Leonardo's biographer' and 'Leonardo's work'. The painter is recoverable.]"
+    ],
+    "noise-tqa-1593-r25": [
+      "The distractor passages are topically related to the query. [Could not identify any link to Misery/Annie Wilkes in the distractor]"
+    ],
+    "noise-tqa-2360-r75": [
+      "The distractor passages are topically related to the query. [Metals and quasicrystals; query is about slang names for marbles]"
+    ],
+    "noise-tqa-2480-r50": [
+      "The distractor passages are topically related to the query. [Spain country article; query is about the German word Bundes in Bundesliga]"
+    ],
+    "refusal-ctrl-nq-4856": [
+      "The retrieved context DOES support the answer (this is an answerable control). ['1871' appears only as a population-census year in an unrelated demographics table (Census|Pop.|1871|6,260). The passage never mentions a debating club at all.]"
+    ],
+    "refusal-ctrl-tqa-2097": [
+      "The retrieved context DOES support the answer (this is an answerable control). [Passage only states Fleming wrote his Bond novels at his Goldeneye estate in Jamaica; it never states the FILM Dr No was set/filmed there. Thin/indirect support for the specific query -- borderline, worth a second look.]"
+    ],
+    "refusal-ctrl-tqa-2252": [
+      "The retrieved context DOES support the answer (this is an answerable control). [Passage mentions Japan only as one of several historical whaling nations (alongside Norway, the Basques, Holland, the US); it never mentions the 2011 suspension or the Sea Shepherd chase of the mother ship asked about in the query.]"
+    ],
+    "refusal-ctrl-tqa-2825": [
+      "The retrieved context DOES support the answer (this is an answerable control). ['Butler' appears only once, in passing, as an example of formal servant attire ('a butler might appear in a tailcoat'). The passage never states a butler is in charge of the dining room, wine cellar, and pantries.]"
+    ],
+    "refusal-ctrl-tqa-3182": [
+      "The retrieved context DOES support the answer (this is an answerable control). [Host list is unordered ('hosted by Brazil, Japan, the UAE and Morocco') and no sentence ties the 2006 edition to a country. The answer is not derivable.]"
+    ],
+    "refusal-ctrl-tqa-630": [
+      "The retrieved context DOES support the answer (this is an answerable control). [Neither passage mentions John, apostles, or witnessing the crucifixion. p0 (answer-bearing) is about the compilation history of 'the Bible' as a text (etymology, chapters/verses, oldest manuscripts); p1 is general historical background on the crucifixion event (Pilate, dates, sources). Ground truth 'John' is not stated or derivable from either.]"
+    ],
+    "refusal-unans-tqa-3027": [
+      "No information in the retrieved context can be used to derive the answer, including by combining multiple passages. [Retained companion passage tqa-3027-p1 is Kim Campbell's own biography, so the withheld answer is fully derivable]"
+    ]
+  },
+  "noise_seeds_discarded": [
+    "nq-1148",
+    "nq-1285",
+    "nq-3340",
+    "nq-3438",
+    "nq-5528",
+    "tqa-1593",
+    "tqa-2360",
+    "tqa-2480"
+  ],
+  "refusal_rebalance_discards": [],
+  "refusal_rebalance_reason": "Refusal F1 precision requires both groups present in comparable numbers (P1 5.4.3)",
+  "case_ids": {
+    "noise": [
+      "noise-nq-1148-r75",
+      "noise-nq-1285-r90",
+      "noise-nq-3340-r90",
+      "noise-nq-3438-r90",
+      "noise-nq-5528-r75",
+      "noise-tqa-1593-r25",
+      "noise-tqa-2360-r75",
+      "noise-tqa-2480-r50"
+    ]
+  }
+}

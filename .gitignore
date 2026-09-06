@@ -17,12 +17,29 @@ dist/
 # OS
 .DS_Store
 
-# Generated at build/run time. The directories are kept so the scripts have
-# somewhere to write; their contents are large and regenerable. Git cannot
-# re-include a file whose parent directory is excluded, hence the stepwise
-# negations rather than a single `!data/cases/.gitkeep`.
+# Generated at build/run time. Most of it is large and regenerable, so it is
+# excluded -- except the frozen benchmark and the result artefacts the report
+# cites, which ship so a reviewer can check the numbers without a rerun (see
+# README "Verifying the frozen benchmark"). Git cannot re-include a file whose
+# parent directory is excluded, hence the stepwise negations.
 data/*
 !data/cases/
+!data/cache/
+data/cache/*
+!data/cache/generators.sqlite
 data/cases/*
 !data/cases/.gitkeep
-runs/
+!data/cases/benchmark.jsonl
+!data/cases/manifest.json
+
+runs/*
+!runs/benchmark_manifest.json
+!runs/analysis.json
+!runs/scores.json
+!runs/generation_artefacts.json
+!runs/ragas_analysis.json
+!runs/discard_report.json
+!runs/scored.jsonl
+!runs/results.jsonl
+!runs/ragas_scores.jsonl
+!runs/validation/

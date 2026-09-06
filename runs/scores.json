@@ -1,0 +1,940 @@
+{
+  "n_rows": 34283,
+  "n_errored": 13,
+  "n_truncated": 667,
+  "classification_methods": {
+    "rule": 34204,
+    "rule_unconfident_no_fallback": 79
+  },
+  "undelimited_answer_recovery": {
+    "recovered_by_method": {
+      "bare_sentinel": 1919,
+      "trailing_sentinel": 56,
+      "malformed_open_tag": 8
+    },
+    "recovered_by_generator": {
+      "standard_2": 1163,
+      "reasoning_2": 820
+    },
+    "recovered_total": 1983,
+    "unrecoverable_nonempty": 459
+  },
+  "crs_judge": {
+    "judged": 2374,
+    "unparseable": 1
+  },
+  "configurations": {
+    "agentic|bm25|reasoning_1": {
+      "n": 2858,
+      "non_termination": {
+        "conflict": {
+          "n": 198,
+          "non_terminating": 23,
+          "rate": 0.1162
+        },
+        "noise": {
+          "n": 2460,
+          "non_terminating": 2,
+          "rate": 0.0008
+        },
+        "refusal": {
+          "n": 200,
+          "non_terminating": 0,
+          "rate": 0.0
+        }
+      },
+      "refusal": {
+        "refusal_precision": 0.784,
+        "refusal_recall": 0.98,
+        "refusal_f1": 0.8711,
+        "tp": 98,
+        "fp": 27,
+        "fn": 2,
+        "tn": 73,
+        "n": 200,
+        "plain_accuracy": 0.28,
+        "negative_rejection_rate": 0.98,
+        "n_unanswerable": 100,
+        "n_answerable": 100,
+        "degenerate": null
+      },
+      "conflict": {
+        "crs_mean": 0.0711,
+        "crs_mean_normalised": 0.0178,
+        "n": 197,
+        "distribution": {
+          "0": 191,
+          "1": 1,
+          "2": 3,
+          "3": 1,
+          "4": 1
+        },
+        "binary_correct_side_accuracy": 0.1777,
+        "binary_correct_side_accuracy_committed_only": 0.6364,
+        "n_no_commitment": 142,
+        "ragas_faithfulness": null,
+        "n_unscored": 1
+      },
+      "noise_accuracy_by_ratio": {
+        "0.0": 0.5996,
+        "0.25": 0.5976,
+        "0.5": 0.5833,
+        "0.75": 0.5894,
+        "0.9": 0.5549
+      },
+      "noise": {
+        "ndc_auc": 0.5885,
+        "ndc50": null,
+        "ndc50_censoring": "right",
+        "ndc50_display": "> 0.90",
+        "ndc50_reached_threshold": false,
+        "ndc_slope": 0.0169,
+        "ndc_cliff": 0.0346,
+        "curve": {
+          "0.0": 0.5996,
+          "0.25": 0.5976,
+          "0.5": 0.5833,
+          "0.75": 0.5894,
+          "0.9": 0.5549
+        },
+        "accuracy_at_fixed_point": 0.5894
+      }
+    },
+    "agentic|bm25|reasoning_2": {
+      "n": 2858,
+      "non_termination": {
+        "conflict": {
+          "n": 198,
+          "non_terminating": 0,
+          "rate": 0.0
+        },
+        "noise": {
+          "n": 2460,
+          "non_terminating": 0,
+          "rate": 0.0
+        },
+        "refusal": {
+          "n": 200,
+          "non_terminating": 0,
+          "rate": 0.0
+        }
+      },
+      "refusal": {
+        "refusal_precision": 0.8286,
+        "refusal_recall": 0.87,
+        "refusal_f1": 0.8488,
+        "tp": 87,
+        "fp": 18,
+        "fn": 13,
+        "tn": 82,
+        "n": 200,
+        "plain_accuracy": 0.275,
+        "negative_rejection_rate": 0.87,
+        "n_unanswerable": 100,
+        "n_answerable": 100,
+        "degenerate": null
+      },
+      "conflict": {
+        "crs_mean": 0.0404,
+        "crs_mean_normalised": 0.0101,
+        "n": 198,
+        "distribution": {
+          "0": 194,
+          "1": 0,
+          "2": 4,
+          "3": 0,
+          "4": 0
+        },
+        "binary_correct_side_accuracy": 0.4798,
+        "binary_correct_side_accuracy_committed_only": 0.6169,
+        "n_no_commitment": 44,
+        "ragas_faithfulness": null,
+        "n_unscored": 0
+      },
+      "noise_accuracy_by_ratio": {
+        "0.0": 0.5915,
+        "0.25": 0.5935,
+        "0.5": 0.5976,
+        "0.75": 0.5813,
+        "0.9": 0.5589
+      },
+      "noise": {
+        "ndc_auc": 0.5888,
+        "ndc50": null,
+        "ndc50_censoring": "right",
+        "ndc50_display": "> 0.90",
+        "ndc50_reached_threshold": false,
+        "ndc_slope": 0.0193,
+        "ndc_cliff": 0.0224,
+        "curve": {
+          "0.0": 0.5915,
+          "0.25": 0.5935,
+          "0.5": 0.5976,
+          "0.75": 0.5813,
+          "0.9": 0.5589
+        },
+        "accuracy_at_fixed_point": 0.5813
+      }
+    },
+    "agentic|dpr|reasoning_1": {
+      "n": 2857,
+      "non_termination": {
+        "conflict": {
+          "n": 197,
+          "non_terminating": 22,
+          "rate": 0.1117
+        },
+        "noise": {
+          "n": 2460,
+          "non_terminating": 2,
+          "rate": 0.0008
+        },
+        "refusal": {
+          "n": 200,
+          "non_terminating": 0,
+          "rate": 0.0
+        }
+      },
+      "refusal": {
+        "refusal_precision": 0.8151,
+        "refusal_recall": 0.97,
+        "refusal_f1": 0.8858,
+        "tp": 97,
+        "fp": 22,
+        "fn": 3,
+        "tn": 78,
+        "n": 200,
+        "plain_accuracy": 0.315,
+        "negative_rejection_rate": 0.97,
+        "n_unanswerable": 100,
+        "n_answerable": 100,
+        "degenerate": null
+      },
+      "conflict": {
+        "crs_mean": 0.1015,
+        "crs_mean_normalised": 0.0254,
+        "n": 197,
+        "distribution": {
+          "0": 188,
+          "1": 0,
+          "2": 8,
+          "3": 0,
+          "4": 1
+        },
+        "binary_correct_side_accuracy": 0.1726,
+        "binary_correct_side_accuracy_committed_only": 0.68,
+        "n_no_commitment": 147,
+        "ragas_faithfulness": null,
+        "n_unscored": 0
+      },
+      "noise_accuracy_by_ratio": {
+        "0.0": 0.6159,
+        "0.25": 0.6138,
+        "0.5": 0.6138,
+        "0.75": 0.6118,
+        "0.9": 0.5589
+      },
+      "noise": {
+        "ndc_auc": 0.6091,
+        "ndc50": null,
+        "ndc50_censoring": "right",
+        "ndc50_display": "> 0.90",
+        "ndc50_reached_threshold": false,
+        "ndc_slope": 0.019,
+        "ndc_cliff": 0.0528,
+        "curve": {
+          "0.0": 0.6159,
+          "0.25": 0.6138,
+          "0.5": 0.6138,
+          "0.75": 0.6118,
+          "0.9": 0.5589
+        },
+        "accuracy_at_fixed_point": 0.6118
+      }
+    },
+    "agentic|dpr|reasoning_2": {
+      "n": 2858,
+      "non_termination": {
+        "conflict": {
+          "n": 198,
+          "non_terminating": 0,
+          "rate": 0.0
+        },
+        "noise": {
+          "n": 2460,
+          "non_terminating": 1,
+          "rate": 0.0004
+        },
+        "refusal": {
+          "n": 200,
+          "non_terminating": 0,
+          "rate": 0.0
+        }
+      },
+      "refusal": {
+        "refusal_precision": 0.8224,
+        "refusal_recall": 0.88,
+        "refusal_f1": 0.8502,
+        "tp": 88,
+        "fp": 19,
+        "fn": 12,
+        "tn": 81,
+        "n": 200,
+        "plain_accuracy": 0.285,
+        "negative_rejection_rate": 0.88,
+        "n_unanswerable": 100,
+        "n_answerable": 100,
+        "degenerate": null
+      },
+      "conflict": {
+        "crs_mean": 0.0152,
+        "crs_mean_normalised": 0.0038,
+        "n": 198,
+        "distribution": {
+          "0": 196,
+          "1": 1,
+          "2": 1,
+          "3": 0,
+          "4": 0
+        },
+        "binary_correct_side_accuracy": 0.4848,
+        "binary_correct_side_accuracy_committed_only": 0.6154,
+        "n_no_commitment": 42,
+        "ragas_faithfulness": null,
+        "n_unscored": 0
+      },
+      "noise_accuracy_by_ratio": {
+        "0.0": 0.5935,
+        "0.25": 0.5996,
+        "0.5": 0.5874,
+        "0.75": 0.5793,
+        "0.9": 0.5528
+      },
+      "noise": {
+        "ndc_auc": 0.5869,
+        "ndc50": null,
+        "ndc50_censoring": "right",
+        "ndc50_display": "> 0.90",
+        "ndc50_reached_threshold": false,
+        "ndc_slope": 0.0156,
+        "ndc_cliff": 0.0264,
+        "curve": {
+          "0.0": 0.5935,
+          "0.25": 0.5996,
+          "0.5": 0.5874,
+          "0.75": 0.5793,
+          "0.9": 0.5528
+        },
+        "accuracy_at_fixed_point": 0.5793
+      }
+    },
+    "naive|bm25|standard_1": {
+      "n": 2856,
+      "non_termination": {
+        "conflict": {
+          "n": 198,
+          "non_terminating": 0,
+          "rate": 0.0
+        },
+        "noise": {
+          "n": 2458,
+          "non_terminating": 4,
+          "rate": 0.0016
+        },
+        "refusal": {
+          "n": 200,
+          "non_terminating": 1,
+          "rate": 0.005
+        }
+      },
+      "refusal": {
+        "refusal_precision": 0.784,
+        "refusal_recall": 0.98,
+        "refusal_f1": 0.8711,
+        "tp": 98,
+        "fp": 27,
+        "fn": 2,
+        "tn": 73,
+        "n": 200,
+        "plain_accuracy": 0.275,
+        "negative_rejection_rate": 0.98,
+        "n_unanswerable": 100,
+        "n_answerable": 100,
+        "degenerate": null
+      },
+      "conflict": {
+        "crs_mean": 0.0101,
+        "crs_mean_normalised": 0.0025,
+        "n": 198,
+        "distribution": {
+          "0": 197,
+          "1": 0,
+          "2": 1,
+          "3": 0,
+          "4": 0
+        },
+        "binary_correct_side_accuracy": 0.3283,
+        "binary_correct_side_accuracy_committed_only": 0.619,
+        "n_no_commitment": 93,
+        "ragas_faithfulness": null,
+        "n_unscored": 0
+      },
+      "noise_accuracy_by_ratio": {
+        "0.0": 0.5854,
+        "0.25": 0.5732,
+        "0.5": 0.565,
+        "0.75": 0.4959,
+        "0.9": 0.4531
+      },
+      "noise": {
+        "ndc_auc": 0.5454,
+        "ndc50": 0.7353,
+        "ndc50_censoring": "none",
+        "ndc50_display": "0.735",
+        "ndc50_reached_threshold": true,
+        "ndc_slope": 0.0331,
+        "ndc_cliff": 0.0691,
+        "curve": {
+          "0.0": 0.5854,
+          "0.25": 0.5732,
+          "0.5": 0.565,
+          "0.75": 0.4959,
+          "0.9": 0.4531
+        },
+        "accuracy_at_fixed_point": 0.4959
+      }
+    },
+    "naive|bm25|standard_2": {
+      "n": 2857,
+      "non_termination": {
+        "conflict": {
+          "n": 198,
+          "non_terminating": 0,
+          "rate": 0.0
+        },
+        "noise": {
+          "n": 2459,
+          "non_terminating": 0,
+          "rate": 0.0
+        },
+        "refusal": {
+          "n": 200,
+          "non_terminating": 0,
+          "rate": 0.0
+        }
+      },
+      "refusal": {
+        "refusal_precision": 0.812,
+        "refusal_recall": 0.95,
+        "refusal_f1": 0.8756,
+        "tp": 95,
+        "fp": 22,
+        "fn": 5,
+        "tn": 78,
+        "n": 200,
+        "plain_accuracy": 0.255,
+        "negative_rejection_rate": 0.95,
+        "n_unanswerable": 100,
+        "n_answerable": 100,
+        "degenerate": null
+      },
+      "conflict": {
+        "crs_mean": 0.0404,
+        "crs_mean_normalised": 0.0101,
+        "n": 198,
+        "distribution": {
+          "0": 193,
+          "1": 2,
+          "2": 3,
+          "3": 0,
+          "4": 0
+        },
+        "binary_correct_side_accuracy": 0.4293,
+        "binary_correct_side_accuracy_committed_only": 0.5782,
+        "n_no_commitment": 51,
+        "ragas_faithfulness": null,
+        "n_unscored": 0
+      },
+      "noise_accuracy_by_ratio": {
+        "0.0": 0.5813,
+        "0.25": 0.5528,
+        "0.5": 0.5427,
+        "0.75": 0.5528,
+        "0.9": 0.5316
+      },
+      "noise": {
+        "ndc_auc": 0.5522,
+        "ndc50": null,
+        "ndc50_censoring": "right",
+        "ndc50_display": "> 0.90",
+        "ndc50_reached_threshold": false,
+        "ndc_slope": 0.02,
+        "ndc_cliff": 0.0285,
+        "curve": {
+          "0.0": 0.5813,
+          "0.25": 0.5528,
+          "0.5": 0.5427,
+          "0.75": 0.5528,
+          "0.9": 0.5316
+        },
+        "accuracy_at_fixed_point": 0.5528
+      }
+    },
+    "naive|dpr|standard_1": {
+      "n": 2856,
+      "non_termination": {
+        "conflict": {
+          "n": 198,
+          "non_terminating": 0,
+          "rate": 0.0
+        },
+        "noise": {
+          "n": 2458,
+          "non_terminating": 3,
+          "rate": 0.0012
+        },
+        "refusal": {
+          "n": 200,
+          "non_terminating": 1,
+          "rate": 0.005
+        }
+      },
+      "refusal": {
+        "refusal_precision": 0.7778,
+        "refusal_recall": 0.98,
+        "refusal_f1": 0.8673,
+        "tp": 98,
+        "fp": 28,
+        "fn": 2,
+        "tn": 72,
+        "n": 200,
+        "plain_accuracy": 0.28,
+        "negative_rejection_rate": 0.98,
+        "n_unanswerable": 100,
+        "n_answerable": 100,
+        "degenerate": null
+      },
+      "conflict": {
+        "crs_mean": 0.0101,
+        "crs_mean_normalised": 0.0025,
+        "n": 198,
+        "distribution": {
+          "0": 197,
+          "1": 0,
+          "2": 1,
+          "3": 0,
+          "4": 0
+        },
+        "binary_correct_side_accuracy": 0.3182,
+        "binary_correct_side_accuracy_committed_only": 0.5833,
+        "n_no_commitment": 90,
+        "ragas_faithfulness": null,
+        "n_unscored": 0
+      },
+      "noise_accuracy_by_ratio": {
+        "0.0": 0.5793,
+        "0.25": 0.5691,
+        "0.5": 0.5549,
+        "0.75": 0.498,
+        "0.9": 0.4449
+      },
+      "noise": {
+        "ndc_auc": 0.5404,
+        "ndc50": 0.7411,
+        "ndc50_censoring": "none",
+        "ndc50_display": "0.741",
+        "ndc50_reached_threshold": true,
+        "ndc_slope": 0.0336,
+        "ndc_cliff": 0.0569,
+        "curve": {
+          "0.0": 0.5793,
+          "0.25": 0.5691,
+          "0.5": 0.5549,
+          "0.75": 0.498,
+          "0.9": 0.4449
+        },
+        "accuracy_at_fixed_point": 0.498
+      }
+    },
+    "naive|dpr|standard_2": {
+      "n": 2857,
+      "non_termination": {
+        "conflict": {
+          "n": 198,
+          "non_terminating": 0,
+          "rate": 0.0
+        },
+        "noise": {
+          "n": 2459,
+          "non_terminating": 0,
+          "rate": 0.0
+        },
+        "refusal": {
+          "n": 200,
+          "non_terminating": 0,
+          "rate": 0.0
+        }
+      },
+      "refusal": {
+        "refusal_precision": 0.819,
+        "refusal_recall": 0.95,
+        "refusal_f1": 0.8796,
+        "tp": 95,
+        "fp": 21,
+        "fn": 5,
+        "tn": 79,
+        "n": 200,
+        "plain_accuracy": 0.27,
+        "negative_rejection_rate": 0.95,
+        "n_unanswerable": 100,
+        "n_answerable": 100,
+        "degenerate": null
+      },
+      "conflict": {
+        "crs_mean": 0.0303,
+        "crs_mean_normalised": 0.0076,
+        "n": 198,
+        "distribution": {
+          "0": 195,
+          "1": 0,
+          "2": 3,
+          "3": 0,
+          "4": 0
+        },
+        "binary_correct_side_accuracy": 0.4495,
+        "binary_correct_side_accuracy_committed_only": 0.6054,
+        "n_no_commitment": 51,
+        "ragas_faithfulness": null,
+        "n_unscored": 0
+      },
+      "noise_accuracy_by_ratio": {
+        "0.0": 0.5813,
+        "0.25": 0.5488,
+        "0.5": 0.5569,
+        "0.75": 0.5447,
+        "0.9": 0.5438
+      },
+      "noise": {
+        "ndc_auc": 0.5542,
+        "ndc50": null,
+        "ndc50_censoring": "right",
+        "ndc50_display": "> 0.90",
+        "ndc50_reached_threshold": false,
+        "ndc_slope": 0.0152,
+        "ndc_cliff": 0.0325,
+        "curve": {
+          "0.0": 0.5813,
+          "0.25": 0.5488,
+          "0.5": 0.5569,
+          "0.75": 0.5447,
+          "0.9": 0.5438
+        },
+        "accuracy_at_fixed_point": 0.5447
+      }
+    },
+    "reasoning|bm25|reasoning_1": {
+      "n": 2856,
+      "non_termination": {
+        "conflict": {
+          "n": 198,
+          "non_terminating": 100,
+          "rate": 0.5051
+        },
+        "noise": {
+          "n": 2458,
+          "non_terminating": 59,
+          "rate": 0.024
+        },
+        "refusal": {
+          "n": 200,
+          "non_terminating": 5,
+          "rate": 0.025
+        }
+      },
+      "refusal": {
+        "refusal_precision": 0.7951,
+        "refusal_recall": 0.97,
+        "refusal_f1": 0.8739,
+        "tp": 97,
+        "fp": 25,
+        "fn": 3,
+        "tn": 75,
+        "n": 200,
+        "plain_accuracy": 0.275,
+        "negative_rejection_rate": 0.97,
+        "n_unanswerable": 100,
+        "n_answerable": 100,
+        "degenerate": null
+      },
+      "conflict": {
+        "crs_mean": 0.0808,
+        "crs_mean_normalised": 0.0202,
+        "n": 198,
+        "distribution": {
+          "0": 192,
+          "1": 0,
+          "2": 4,
+          "3": 0,
+          "4": 2
+        },
+        "binary_correct_side_accuracy": 0.0606,
+        "binary_correct_side_accuracy_committed_only": 0.5455,
+        "n_no_commitment": 176,
+        "ragas_faithfulness": null,
+        "n_unscored": 0
+      },
+      "noise_accuracy_by_ratio": {
+        "0.0": 0.6199,
+        "0.25": 0.6118,
+        "0.5": 0.5915,
+        "0.75": 0.5996,
+        "0.9": 0.5776
+      },
+      "noise": {
+        "ndc_auc": 0.6017,
+        "ndc50": null,
+        "ndc50_censoring": "right",
+        "ndc50_display": "> 0.90",
+        "ndc50_reached_threshold": false,
+        "ndc_slope": 0.0168,
+        "ndc_cliff": 0.022,
+        "curve": {
+          "0.0": 0.6199,
+          "0.25": 0.6118,
+          "0.5": 0.5915,
+          "0.75": 0.5996,
+          "0.9": 0.5776
+        },
+        "accuracy_at_fixed_point": 0.5996
+      }
+    },
+    "reasoning|bm25|reasoning_2": {
+      "n": 2857,
+      "non_termination": {
+        "conflict": {
+          "n": 198,
+          "non_terminating": 0,
+          "rate": 0.0
+        },
+        "noise": {
+          "n": 2459,
+          "non_terminating": 0,
+          "rate": 0.0
+        },
+        "refusal": {
+          "n": 200,
+          "non_terminating": 0,
+          "rate": 0.0
+        }
+      },
+      "refusal": {
+        "refusal_precision": 0.7054,
+        "refusal_recall": 0.91,
+        "refusal_f1": 0.7948,
+        "tp": 91,
+        "fp": 38,
+        "fn": 9,
+        "tn": 62,
+        "n": 200,
+        "plain_accuracy": 0.23,
+        "negative_rejection_rate": 0.91,
+        "n_unanswerable": 100,
+        "n_answerable": 100,
+        "degenerate": null
+      },
+      "conflict": {
+        "crs_mean": 0.3384,
+        "crs_mean_normalised": 0.0846,
+        "n": 198,
+        "distribution": {
+          "0": 161,
+          "1": 7,
+          "2": 30,
+          "3": 0,
+          "4": 0
+        },
+        "binary_correct_side_accuracy": 0.2525,
+        "binary_correct_side_accuracy_committed_only": 0.5102,
+        "n_no_commitment": 100,
+        "ragas_faithfulness": null,
+        "n_unscored": 0
+      },
+      "noise_accuracy_by_ratio": {
+        "0.0": 0.498,
+        "0.25": 0.5142,
+        "0.5": 0.5163,
+        "0.75": 0.5081,
+        "0.9": 0.5031
+      },
+      "noise": {
+        "ndc_auc": 0.5102,
+        "ndc50": null,
+        "ndc50_censoring": "left",
+        "ndc50_display": "< 0.00",
+        "ndc50_reached_threshold": false,
+        "ndc_slope": 0.0066,
+        "ndc_cliff": 0.0081,
+        "curve": {
+          "0.0": 0.498,
+          "0.25": 0.5142,
+          "0.5": 0.5163,
+          "0.75": 0.5081,
+          "0.9": 0.5031
+        },
+        "accuracy_at_fixed_point": 0.5081
+      }
+    },
+    "reasoning|dpr|reasoning_1": {
+      "n": 2856,
+      "non_termination": {
+        "conflict": {
+          "n": 198,
+          "non_terminating": 107,
+          "rate": 0.5404
+        },
+        "noise": {
+          "n": 2458,
+          "non_terminating": 57,
+          "rate": 0.0232
+        },
+        "refusal": {
+          "n": 200,
+          "non_terminating": 0,
+          "rate": 0.0
+        }
+      },
+      "refusal": {
+        "refusal_precision": 0.8151,
+        "refusal_recall": 0.97,
+        "refusal_f1": 0.8858,
+        "tp": 97,
+        "fp": 22,
+        "fn": 3,
+        "tn": 78,
+        "n": 200,
+        "plain_accuracy": 0.305,
+        "negative_rejection_rate": 0.97,
+        "n_unanswerable": 100,
+        "n_answerable": 100,
+        "degenerate": null
+      },
+      "conflict": {
+        "crs_mean": 0.0505,
+        "crs_mean_normalised": 0.0126,
+        "n": 198,
+        "distribution": {
+          "0": 194,
+          "1": 0,
+          "2": 3,
+          "3": 0,
+          "4": 1
+        },
+        "binary_correct_side_accuracy": 0.0354,
+        "binary_correct_side_accuracy_committed_only": 0.3889,
+        "n_no_commitment": 180,
+        "ragas_faithfulness": null,
+        "n_unscored": 0
+      },
+      "noise_accuracy_by_ratio": {
+        "0.0": 0.6077,
+        "0.25": 0.5955,
+        "0.5": 0.5976,
+        "0.75": 0.5976,
+        "0.9": 0.5918
+      },
+      "noise": {
+        "ndc_auc": 0.5979,
+        "ndc50": null,
+        "ndc50_censoring": "right",
+        "ndc50_display": "> 0.90",
+        "ndc50_reached_threshold": false,
+        "ndc_slope": 0.009,
+        "ndc_cliff": 0.0122,
+        "curve": {
+          "0.0": 0.6077,
+          "0.25": 0.5955,
+          "0.5": 0.5976,
+          "0.75": 0.5976,
+          "0.9": 0.5918
+        },
+        "accuracy_at_fixed_point": 0.5976
+      }
+    },
+    "reasoning|dpr|reasoning_2": {
+      "n": 2857,
+      "non_termination": {
+        "conflict": {
+          "n": 198,
+          "non_terminating": 0,
+          "rate": 0.0
+        },
+        "noise": {
+          "n": 2459,
+          "non_terminating": 0,
+          "rate": 0.0
+        },
+        "refusal": {
+          "n": 200,
+          "non_terminating": 0,
+          "rate": 0.0
+        }
+      },
+      "refusal": {
+        "refusal_precision": 0.7132,
+        "refusal_recall": 0.92,
+        "refusal_f1": 0.8035,
+        "tp": 92,
+        "fp": 37,
+        "fn": 8,
+        "tn": 63,
+        "n": 200,
+        "plain_accuracy": 0.225,
+        "negative_rejection_rate": 0.92,
+        "n_unanswerable": 100,
+        "n_answerable": 100,
+        "degenerate": null
+      },
+      "conflict": {
+        "crs_mean": 0.3333,
+        "crs_mean_normalised": 0.0833,
+        "n": 198,
+        "distribution": {
+          "0": 162,
+          "1": 10,
+          "2": 24,
+          "3": 0,
+          "4": 2
+        },
+        "binary_correct_side_accuracy": 0.2424,
+        "binary_correct_side_accuracy_committed_only": 0.4706,
+        "n_no_commitment": 96,
+        "ragas_faithfulness": null,
+        "n_unscored": 0
+      },
+      "noise_accuracy_by_ratio": {
+        "0.0": 0.4898,
+        "0.25": 0.5122,
+        "0.5": 0.5142,
+        "0.75": 0.5203,
+        "0.9": 0.5051
+      },
+      "noise": {
+        "ndc_auc": 0.5109,
+        "ndc50": null,
+        "ndc50_censoring": "left",
+        "ndc50_display": "< 0.00",
+        "ndc50_reached_threshold": false,
+        "ndc_slope": 0.0152,
+        "ndc_cliff": 0.0152,
+        "curve": {
+          "0.0": 0.4898,
+          "0.25": 0.5122,
+          "0.5": 0.5142,
+          "0.75": 0.5203,
+          "0.9": 0.5051
+        },
+        "accuracy_at_fixed_point": 0.5203
+      }
+    }
+  }
+}

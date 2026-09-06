@@ -1,0 +1,967 @@
+{
+  "config": {
+    "n_bootstrap": 1000,
+    "confidence": 0.95,
+    "rng_seed": 20260721,
+    "practical_significance": {
+      "refusal_f1": 0.05,
+      "crs": 0.25,
+      "ndc_auc": 0.05
+    }
+  },
+  "descriptive": {
+    "naive": {
+      "n_instances": 11426,
+      "refusal": {
+        "refusal_precision": 0.7975,
+        "refusal_recall": 0.965,
+        "refusal_f1": 0.8733,
+        "tp": 386,
+        "fp": 98,
+        "fn": 14,
+        "tn": 302,
+        "n": 800,
+        "plain_accuracy": 0.27,
+        "negative_rejection_rate": 0.965,
+        "n_unanswerable": 400,
+        "n_answerable": 400,
+        "degenerate": null,
+        "f1_ci": {
+          "observed": 0.8733,
+          "ci_lo": 0.8262,
+          "ci_hi": 0.916,
+          "n_resamples": 1000,
+          "n_undefined_resamples": 0,
+          "excludes_zero": true
+        }
+      },
+      "conflict": {
+        "crs_mean": 1.1624,
+        "crs_mean_normalised": 0.2906,
+        "n": 739,
+        "distribution": {
+          "0": 309,
+          "1": 1,
+          "2": 429,
+          "3": 0,
+          "4": 0
+        },
+        "binary_correct_side_accuracy": 0.0,
+        "ragas_faithfulness": null,
+        "non_terminating": 0,
+        "non_terminating_rate": 0.0,
+        "crs_ci": {
+          "observed": 1.1624,
+          "ci_lo": 1.0449,
+          "ci_hi": 1.2857,
+          "n_resamples": 1000,
+          "n_undefined_resamples": 0,
+          "excludes_zero": true
+        },
+        "crs_ci_excluding_non_terminating": {
+          "observed": 1.1624,
+          "ci_lo": 1.0449,
+          "ci_hi": 1.2857,
+          "n_resamples": 1000,
+          "n_undefined_resamples": 0,
+          "excludes_zero": true
+        }
+      },
+      "noise_accuracy_by_ratio": {
+        "0.0": 0.5818,
+        "0.25": 0.561,
+        "0.5": 0.5549,
+        "0.75": 0.5229,
+        "0.9": 0.4934
+      },
+      "noise": {
+        "ndc_auc": 0.5481,
+        "ndc50": 0.8663,
+        "ndc50_censoring": "none",
+        "ndc50_display": "0.866",
+        "ndc50_reached_threshold": true,
+        "ndc_slope": 0.0221,
+        "ndc_cliff": 0.032,
+        "curve": {
+          "0.0": 0.5818,
+          "0.25": 0.561,
+          "0.5": 0.5549,
+          "0.75": 0.5229,
+          "0.9": 0.4934
+        },
+        "accuracy_at_fixed_point": 0.5229,
+        "auc_ci": {
+          "observed": 0.5481,
+          "ci_lo": 0.5152,
+          "ci_hi": 0.5859,
+          "n_resamples": 1000,
+          "n_undefined_resamples": 0,
+          "excludes_zero": true
+        }
+      }
+    },
+    "reasoning": {
+      "n_instances": 11426,
+      "refusal": {
+        "refusal_precision": 0.7555,
+        "refusal_recall": 0.9425,
+        "refusal_f1": 0.8387,
+        "tp": 377,
+        "fp": 122,
+        "fn": 23,
+        "tn": 278,
+        "n": 800,
+        "plain_accuracy": 0.2587,
+        "negative_rejection_rate": 0.9425,
+        "n_unanswerable": 400,
+        "n_answerable": 400,
+        "degenerate": null,
+        "f1_ci": {
+          "observed": 0.8387,
+          "ci_lo": 0.7909,
+          "ci_hi": 0.8859,
+          "n_resamples": 1000,
+          "n_undefined_resamples": 0,
+          "excludes_zero": true
+        }
+      },
+      "conflict": {
+        "crs_mean": 1.3703,
+        "crs_mean_normalised": 0.3426,
+        "n": 740,
+        "distribution": {
+          "0": 232,
+          "1": 8,
+          "2": 497,
+          "3": 0,
+          "4": 3
+        },
+        "binary_correct_side_accuracy": 0.0,
+        "ragas_faithfulness": null,
+        "non_terminating": 207,
+        "non_terminating_rate": 0.2614,
+        "crs_ci": {
+          "observed": 1.3703,
+          "ci_lo": 1.2765,
+          "ci_hi": 1.4533,
+          "n_resamples": 1000,
+          "n_undefined_resamples": 0,
+          "excludes_zero": true
+        },
+        "crs_ci_excluding_non_terminating": {
+          "observed": 1.6957,
+          "ci_lo": 1.6033,
+          "ci_hi": 1.7823,
+          "n_resamples": 1000,
+          "n_undefined_resamples": 0,
+          "excludes_zero": true
+        }
+      },
+      "noise_accuracy_by_ratio": {
+        "0.0": 0.5539,
+        "0.25": 0.5584,
+        "0.5": 0.5549,
+        "0.75": 0.5564,
+        "0.9": 0.5443
+      },
+      "noise": {
+        "ndc_auc": 0.5552,
+        "ndc50": null,
+        "ndc50_censoring": "right",
+        "ndc50_display": "> 0.90",
+        "ndc50_reached_threshold": false,
+        "ndc_slope": 0.0078,
+        "ndc_cliff": 0.0121,
+        "curve": {
+          "0.0": 0.5539,
+          "0.25": 0.5584,
+          "0.5": 0.5549,
+          "0.75": 0.5564,
+          "0.9": 0.5443
+        },
+        "accuracy_at_fixed_point": 0.5564,
+        "auc_ci": {
+          "observed": 0.5552,
+          "ci_lo": 0.5215,
+          "ci_hi": 0.592,
+          "n_resamples": 1000,
+          "n_undefined_resamples": 0,
+          "excludes_zero": true
+        }
+      }
+    },
+    "agentic": {
+      "n_instances": 11431,
+      "refusal": {
+        "refusal_precision": 0.8114,
+        "refusal_recall": 0.925,
+        "refusal_f1": 0.8645,
+        "tp": 370,
+        "fp": 86,
+        "fn": 30,
+        "tn": 314,
+        "n": 800,
+        "plain_accuracy": 0.2888,
+        "negative_rejection_rate": 0.925,
+        "n_unanswerable": 400,
+        "n_answerable": 400,
+        "degenerate": null,
+        "f1_ci": {
+          "observed": 0.8645,
+          "ci_lo": 0.819,
+          "ci_hi": 0.9035,
+          "n_resamples": 1000,
+          "n_undefined_resamples": 0,
+          "excludes_zero": true
+        }
+      },
+      "conflict": {
+        "crs_mean": 1.2578,
+        "crs_mean_normalised": 0.3145,
+        "n": 733,
+        "distribution": {
+          "0": 274,
+          "1": 1,
+          "2": 455,
+          "3": 1,
+          "4": 2
+        },
+        "binary_correct_side_accuracy": 0.0,
+        "ragas_faithfulness": null,
+        "non_terminating": 45,
+        "non_terminating_rate": 0.0569,
+        "crs_ci": {
+          "observed": 1.2578,
+          "ci_lo": 1.158,
+          "ci_hi": 1.3634,
+          "n_resamples": 1000,
+          "n_undefined_resamples": 0,
+          "excludes_zero": true
+        },
+        "crs_ci_excluding_non_terminating": {
+          "observed": 1.3227,
+          "ci_lo": 1.2173,
+          "ci_hi": 1.429,
+          "n_resamples": 1000,
+          "n_undefined_resamples": 0,
+          "excludes_zero": true
+        }
+      },
+      "noise_accuracy_by_ratio": {
+        "0.0": 0.6001,
+        "0.25": 0.6011,
+        "0.5": 0.5955,
+        "0.75": 0.5904,
+        "0.9": 0.5564
+      },
+      "noise": {
+        "ndc_auc": 0.5933,
+        "ndc50": null,
+        "ndc50_censoring": "right",
+        "ndc50_display": "> 0.90",
+        "ndc50_reached_threshold": false,
+        "ndc_slope": 0.0149,
+        "ndc_cliff": 0.034,
+        "curve": {
+          "0.0": 0.6001,
+          "0.25": 0.6011,
+          "0.5": 0.5955,
+          "0.75": 0.5904,
+          "0.9": 0.5564
+        },
+        "accuracy_at_fixed_point": 0.5904,
+        "auc_ci": {
+          "observed": 0.5933,
+          "ci_lo": 0.5596,
+          "ci_hi": 0.6309,
+          "n_resamples": 1000,
+          "n_undefined_resamples": 0,
+          "excludes_zero": true
+        }
+      }
+    }
+  },
+  "paired_comparisons": [
+    {
+      "metric": "refusal_f1",
+      "comparison": "reasoning vs naive",
+      "difference": {
+        "observed": -0.0346,
+        "ci_lo": -0.0581,
+        "ci_hi": -0.0126,
+        "n_resamples": 1000,
+        "n_undefined_resamples": 0,
+        "excludes_zero": true
+      },
+      "practical_threshold": 0.05,
+      "statistically_significant": true,
+      "practically_significant": false
+    },
+    {
+      "metric": "refusal_f1",
+      "comparison": "agentic vs reasoning",
+      "difference": {
+        "observed": 0.0258,
+        "ci_lo": -0.0046,
+        "ci_hi": 0.0576,
+        "n_resamples": 1000,
+        "n_undefined_resamples": 0,
+        "excludes_zero": false
+      },
+      "practical_threshold": 0.05,
+      "statistically_significant": false,
+      "practically_significant": false
+    },
+    {
+      "metric": "refusal_f1",
+      "comparison": "agentic vs naive",
+      "difference": {
+        "observed": -0.0088,
+        "ci_lo": -0.0351,
+        "ci_hi": 0.0198,
+        "n_resamples": 1000,
+        "n_undefined_resamples": 0,
+        "excludes_zero": false
+      },
+      "practical_threshold": 0.05,
+      "statistically_significant": false,
+      "practically_significant": false
+    },
+    {
+      "metric": "crs",
+      "comparison": "reasoning vs naive",
+      "difference": {
+        "observed": 0.2079,
+        "ci_lo": 0.1042,
+        "ci_hi": 0.312,
+        "n_resamples": 1000,
+        "n_undefined_resamples": 0,
+        "excludes_zero": true
+      },
+      "practical_threshold": 0.25,
+      "statistically_significant": true,
+      "practically_significant": false
+    },
+    {
+      "metric": "crs",
+      "comparison": "agentic vs reasoning",
+      "difference": {
+        "observed": -0.1124,
+        "ci_lo": -0.2085,
+        "ci_hi": -0.0243,
+        "n_resamples": 1000,
+        "n_undefined_resamples": 0,
+        "excludes_zero": true
+      },
+      "practical_threshold": 0.25,
+      "statistically_significant": true,
+      "practically_significant": false
+    },
+    {
+      "metric": "crs",
+      "comparison": "agentic vs naive",
+      "difference": {
+        "observed": 0.0955,
+        "ci_lo": 0.01,
+        "ci_hi": 0.1823,
+        "n_resamples": 1000,
+        "n_undefined_resamples": 0,
+        "excludes_zero": true
+      },
+      "practical_threshold": 0.25,
+      "statistically_significant": true,
+      "practically_significant": false
+    },
+    {
+      "metric": "ndc_auc",
+      "comparison": "reasoning vs naive",
+      "difference": {
+        "observed": 0.0071,
+        "ci_lo": -0.0102,
+        "ci_hi": 0.0244,
+        "n_resamples": 1000,
+        "n_undefined_resamples": 0,
+        "excludes_zero": false
+      },
+      "practical_threshold": 0.05,
+      "statistically_significant": false,
+      "practically_significant": false
+    },
+    {
+      "metric": "ndc_auc",
+      "comparison": "agentic vs reasoning",
+      "difference": {
+        "observed": 0.0381,
+        "ci_lo": 0.0197,
+        "ci_hi": 0.0564,
+        "n_resamples": 1000,
+        "n_undefined_resamples": 0,
+        "excludes_zero": true
+      },
+      "practical_threshold": 0.05,
+      "statistically_significant": true,
+      "practically_significant": false
+    },
+    {
+      "metric": "ndc_auc",
+      "comparison": "agentic vs naive",
+      "difference": {
+        "observed": 0.0453,
+        "ci_lo": 0.0258,
+        "ci_hi": 0.0647,
+        "n_resamples": 1000,
+        "n_undefined_resamples": 0,
+        "excludes_zero": true
+      },
+      "practical_threshold": 0.05,
+      "statistically_significant": true,
+      "practically_significant": false
+    }
+  ],
+  "divergent_cases": [
+    {
+      "case_id": "conflict-nq-1285",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "0",
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-1310",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "2",
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-1337",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "0",
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-1397",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "0",
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-1589",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "0",
+        "naive": "2",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-2044",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "0",
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-2051",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "0",
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-2410",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "0",
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-2428",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "0",
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-243",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "2",
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-2611",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "0",
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-2753",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "0",
+        "naive": "2",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-2845",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "0",
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-3095",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "0",
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-3133",
+      "dimension": "conflict",
+      "by_class": {
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-318",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "0",
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-3207",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "2",
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-3225",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "2",
+        "naive": "0",
+        "reasoning": "0"
+      }
+    },
+    {
+      "case_id": "conflict-nq-3334",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "0",
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "conflict-nq-3653",
+      "dimension": "conflict",
+      "by_class": {
+        "agentic": "0",
+        "naive": "0",
+        "reasoning": "2"
+      }
+    },
+    {
+      "case_id": "noise-nq-1022-r00",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "True",
+        "naive": "True",
+        "reasoning": "False"
+      }
+    },
+    {
+      "case_id": "noise-nq-1022-r75",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "True",
+        "naive": "False",
+        "reasoning": "True"
+      }
+    },
+    {
+      "case_id": "noise-nq-1022-r90",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "True",
+        "naive": "True",
+        "reasoning": "None"
+      }
+    },
+    {
+      "case_id": "noise-nq-103-r00",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "False",
+        "naive": "True",
+        "reasoning": "True"
+      }
+    },
+    {
+      "case_id": "noise-nq-103-r25",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "True",
+        "naive": "False",
+        "reasoning": "True"
+      }
+    },
+    {
+      "case_id": "noise-nq-103-r50",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "True",
+        "naive": "False",
+        "reasoning": "True"
+      }
+    },
+    {
+      "case_id": "noise-nq-103-r75",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "True",
+        "naive": "False",
+        "reasoning": "True"
+      }
+    },
+    {
+      "case_id": "noise-nq-103-r90",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "True",
+        "naive": "False",
+        "reasoning": "True"
+      }
+    },
+    {
+      "case_id": "noise-nq-112-r00",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "True",
+        "naive": "False",
+        "reasoning": "False"
+      }
+    },
+    {
+      "case_id": "noise-nq-112-r50",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "False",
+        "naive": "False",
+        "reasoning": "True"
+      }
+    },
+    {
+      "case_id": "noise-nq-112-r75",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "True",
+        "naive": "False",
+        "reasoning": "True"
+      }
+    },
+    {
+      "case_id": "noise-nq-112-r90",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "True",
+        "naive": "False",
+        "reasoning": "True"
+      }
+    },
+    {
+      "case_id": "noise-nq-1120-r90",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "True",
+        "naive": "True",
+        "reasoning": "None"
+      }
+    },
+    {
+      "case_id": "noise-nq-1131-r00",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "False",
+        "naive": "None",
+        "reasoning": "None"
+      }
+    },
+    {
+      "case_id": "noise-nq-1131-r25",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "True",
+        "naive": "None",
+        "reasoning": "None"
+      }
+    },
+    {
+      "case_id": "noise-nq-1131-r50",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "False",
+        "naive": "None",
+        "reasoning": "None"
+      }
+    },
+    {
+      "case_id": "noise-nq-1131-r75",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "False",
+        "naive": "None",
+        "reasoning": "None"
+      }
+    },
+    {
+      "case_id": "noise-nq-1131-r90",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "True",
+        "naive": "None",
+        "reasoning": "None"
+      }
+    },
+    {
+      "case_id": "noise-nq-1169-r00",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "True",
+        "naive": "True",
+        "reasoning": "None"
+      }
+    },
+    {
+      "case_id": "noise-nq-1169-r25",
+      "dimension": "noise",
+      "by_class": {
+        "agentic": "True",
+        "naive": "False",
+        "reasoning": "True"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-1131",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "answer",
+        "naive": "refusal",
+        "reasoning": "refusal"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-1506",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "unparseable",
+        "naive": "answer",
+        "reasoning": "answer"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-1556",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "refusal",
+        "naive": "answer",
+        "reasoning": "refusal"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-2002",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "answer",
+        "naive": "answer",
+        "reasoning": "refusal"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-206",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "answer",
+        "naive": "refusal",
+        "reasoning": "refusal"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-3207",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "unparseable",
+        "naive": "answer",
+        "reasoning": "answer"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-3267",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "answer",
+        "naive": "refusal",
+        "reasoning": "refusal"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-3428",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "refusal",
+        "naive": "answer",
+        "reasoning": "refusal"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-3465",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "answer",
+        "naive": "refusal",
+        "reasoning": "refusal"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-3515",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "answer",
+        "naive": "answer",
+        "reasoning": "refusal"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-3527",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "answer",
+        "naive": "refusal",
+        "reasoning": "refusal"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-3648",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "answer",
+        "naive": "unparseable",
+        "reasoning": "answer"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-3653",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "answer",
+        "naive": "answer",
+        "reasoning": "refusal"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-3669",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "answer",
+        "naive": "answer",
+        "reasoning": "refusal"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-4173",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "refusal",
+        "naive": "refusal",
+        "reasoning": "unparseable"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-4760",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "answer",
+        "naive": "answer",
+        "reasoning": "refusal"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-542",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "unparseable",
+        "naive": "answer",
+        "reasoning": "answer"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-nq-545",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "refusal",
+        "naive": "answer",
+        "reasoning": "answer"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-tqa-1413",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "answer",
+        "naive": "answer",
+        "reasoning": "refusal"
+      }
+    },
+    {
+      "case_id": "refusal-ctrl-tqa-1439",
+      "dimension": "refusal",
+      "by_class": {
+        "agentic": "answer",
+        "naive": "answer",
+        "reasoning": "refusal"
+      }
+    }
+  ],
+  "figures": [
+    "runs/figures/ndc_by_class.png",
+    "runs/figures/crs_distribution.png",
+    "runs/figures/refusal_components.png"
+  ]
+}

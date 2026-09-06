@@ -1,0 +1,29 @@
+{
+  "cohens_kappa": -0.0338,
+  "rater_kind": "inter",
+  "interpretation": "inter-rater agreement (P1 5.5.3)",
+  "n_items_compared": 100,
+  "n_cases_compared": 50,
+  "observed_agreement": 0.89,
+  "kappa_by_dimension": {
+    "conflict": 1.0,
+    "noise": -0.0332,
+    "refusal": 0.0
+  },
+  "blank_rows_skipped": 212,
+  "meets_p1_gate": false,
+  "p1_threshold": 0.6,
+  "paradox_diagnostics": {
+    "cohens_kappa": -0.0338,
+    "observed_agreement": 0.89,
+    "expected_agreement": 0.8936,
+    "n_items": 100,
+    "n_categories": 2,
+    "gwet_ac1": 0.8772,
+    "pabak": 0.78,
+    "prevalence_index": 0.89,
+    "bias_index": 0.07,
+    "kappa_paradox_detected": true
+  },
+  "gate_interpretation": "Cohen's kappa is -0.0338 at 89.0% observed agreement and a prevalence index of 0.89. That combination is the kappa paradox (Feinstein & Cicchetti 1990): the raters agree on almost every item and almost always in the same category, so expected agreement is near-total and kappa has no room to be positive. Gwet's AC1 = 0.8772 and PABAK = 0.7800 on the same data. REPORT ALL OF THEM: the P1 gate is not met on its stated statistic, and the reason is a property of the sample, not evidence that the annotators disagreed."
+}

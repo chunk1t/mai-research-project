@@ -3,7 +3,8 @@
 
     python scripts/verify_pack.py
 
-The pack in `for_cowork/WRITING_PACK.md` is the factual basis for Chapters
+The pack in `for_cowork/WRITING_PACK.md` (or, in the code release, the
+ledger extracted into `docs/NUMBERS_LEDGER.md`) is the factual basis for Chapters
 6-9, and it will be read by a writing session that cannot open the JSON
 artefacts to check anything. A transcription slip there becomes a wrong number
 in the submitted report with nothing downstream to catch it.
@@ -39,7 +40,16 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PACK = ROOT / "for_cowork" / "WRITING_PACK.md"
+
+# The ledger lives in the writing pack in the working repository, and is
+# extracted into docs/NUMBERS_LEDGER.md for the code release, which ships the
+# machine-checkable rows without the chapter-drafting material around them.
+# Resolving both keeps one implementation valid in either layout.
+_PACK_CANDIDATES = (
+    ROOT / "for_cowork" / "WRITING_PACK.md",
+    ROOT / "docs" / "NUMBERS_LEDGER.md",
+)
+PACK = next((p for p in _PACK_CANDIDATES if p.exists()), _PACK_CANDIDATES[0])
 
 # A ledger row: four pipe-delimited cells, the third ending in .json.
 _ROW = re.compile(

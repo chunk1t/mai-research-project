@@ -1,0 +1,23 @@
+{
+  "cohens_kappa": 0.0805,
+  "quadratic_weighted_kappa": 0.1233,
+  "n_cases": 100,
+  "observed_agreement": 0.42,
+  "exact_matches": 42,
+  "within_one_level": 46,
+  "judge_distribution": {
+    "0": 39,
+    "1": 1,
+    "2": 59,
+    "4": 1
+  },
+  "human_distribution": {
+    "0": 93,
+    "1": 5,
+    "2": 1,
+    "4": 1
+  },
+  "meets_p1_gate": false,
+  "p1_threshold": 0.6,
+  "unrated_items_excluded": 0
+}

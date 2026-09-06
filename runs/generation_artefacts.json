@@ -1,0 +1,284 @@
+{
+  "n_pairs": 198,
+  "edit_localisation": {
+    "mean_edit_fraction": 0.0092,
+    "median_edit_fraction": 0.0052,
+    "max_edit_fraction": 0.0604,
+    "n_pairs_over_half_rewritten": 0,
+    "note": "A SMALL edit fraction is the desired outcome: the generator is asked to change only the answering claim, so a localised edit means the two sides of the conflict differ in that claim and nothing else."
+  },
+  "cross_case_repeated_phrasing": {
+    "ngram_sizes": [
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "generated": {
+      "4": 2045,
+      "5": 1578,
+      "6": 1339,
+      "7": 1198,
+      "8": 1061
+    },
+    "original": {
+      "4": 2046,
+      "5": 1577,
+      "6": 1337,
+      "7": 1197,
+      "8": 1060
+    },
+    "note": "n-grams shared by two or more different cases. The original column is the baseline: human-written Wikipedia prose repeats itself too, so only the comparison is meaningful."
+  },
+  "vocabulary": {
+    "over_represented": [
+      {
+        "token": "brody",
+        "rate_ratio": 15.995,
+        "generated_count": 16
+      },
+      {
+        "token": "lionel",
+        "rate_ratio": 9.997,
+        "generated_count": 10
+      },
+      {
+        "token": "doyle",
+        "rate_ratio": 8.997,
+        "generated_count": 9
+      },
+      {
+        "token": "batman",
+        "rate_ratio": 6.998,
+        "generated_count": 7
+      },
+      {
+        "token": "adrien",
+        "rate_ratio": 5.998,
+        "generated_count": 6
+      },
+      {
+        "token": "birds",
+        "rate_ratio": 5.998,
+        "generated_count": 12
+      },
+      {
+        "token": "deer",
+        "rate_ratio": 5.998,
+        "generated_count": 6
+      },
+      {
+        "token": "shapley",
+        "rate_ratio": 5.998,
+        "generated_count": 6
+      },
+      {
+        "token": "beach",
+        "rate_ratio": 4.499,
+        "generated_count": 9
+      },
+      {
+        "token": "steel",
+        "rate_ratio": 4.499,
+        "generated_count": 9
+      },
+      {
+        "token": "cutting",
+        "rate_ratio": 3.999,
+        "generated_count": 8
+      },
+      {
+        "token": "gabriel",
+        "rate_ratio": 3.999,
+        "generated_count": 8
+      },
+      {
+        "token": "oregon",
+        "rate_ratio": 3.999,
+        "generated_count": 8
+      },
+      {
+        "token": "mars",
+        "rate_ratio": 3.599,
+        "generated_count": 18
+      },
+      {
+        "token": "davidson",
+        "rate_ratio": 3.499,
+        "generated_count": 7
+      },
+      {
+        "token": "benson",
+        "rate_ratio": 3.332,
+        "generated_count": 10
+      },
+      {
+        "token": "arnold",
+        "rate_ratio": 2.999,
+        "generated_count": 6
+      },
+      {
+        "token": "evans",
+        "rate_ratio": 2.999,
+        "generated_count": 9
+      },
+      {
+        "token": "samuel",
+        "rate_ratio": 2.999,
+        "generated_count": 9
+      },
+      {
+        "token": "internet",
+        "rate_ratio": 2.874,
+        "generated_count": 23
+      },
+      {
+        "token": "endeavour",
+        "rate_ratio": 2.499,
+        "generated_count": 5
+      },
+      {
+        "token": "scotia",
+        "rate_ratio": 2.499,
+        "generated_count": 5
+      },
+      {
+        "token": "wallace",
+        "rate_ratio": 2.499,
+        "generated_count": 5
+      },
+      {
+        "token": "connections",
+        "rate_ratio": 2.333,
+        "generated_count": 7
+      },
+      {
+        "token": "eileen",
+        "rate_ratio": 2.333,
+        "generated_count": 7
+      }
+    ],
+    "generated_only": [
+      {
+        "token": "stower",
+        "generated_count": 22
+      },
+      {
+        "token": "minsk",
+        "generated_count": 11
+      },
+      {
+        "token": "kia",
+        "generated_count": 10
+      },
+      {
+        "token": "lev",
+        "generated_count": 10
+      },
+      {
+        "token": "cello",
+        "generated_count": 9
+      },
+      {
+        "token": "kleinwort",
+        "generated_count": 9
+      },
+      {
+        "token": "vault",
+        "generated_count": 9
+      },
+      {
+        "token": "gabriel's",
+        "generated_count": 8
+      },
+      {
+        "token": "kidneys",
+        "generated_count": 8
+      },
+      {
+        "token": "kosovo",
+        "generated_count": 8
+      },
+      {
+        "token": "richie",
+        "generated_count": 8
+      },
+      {
+        "token": "shuman",
+        "generated_count": 8
+      },
+      {
+        "token": "arsinoe",
+        "generated_count": 7
+      },
+      {
+        "token": "blockheads",
+        "generated_count": 7
+      },
+      {
+        "token": "crests",
+        "generated_count": 7
+      },
+      {
+        "token": "kosovar",
+        "generated_count": 7
+      },
+      {
+        "token": "pomus",
+        "generated_count": 7
+      },
+      {
+        "token": "beano",
+        "generated_count": 6
+      },
+      {
+        "token": "chen",
+        "generated_count": 6
+      },
+      {
+        "token": "conan",
+        "generated_count": 6
+      },
+      {
+        "token": "stowerer",
+        "generated_count": 6
+      },
+      {
+        "token": "aloud",
+        "generated_count": 5
+      },
+      {
+        "token": "expressionists",
+        "generated_count": 5
+      },
+      {
+        "token": "regan",
+        "generated_count": 5
+      },
+      {
+        "token": "sardinia",
+        "generated_count": 5
+      }
+    ],
+    "generated_only_by_case_share": [
+      {
+        "token": "iris",
+        "share_of_cases": 0.0101,
+        "n_cases": 2
+      },
+      {
+        "token": "murdoch",
+        "share_of_cases": 0.0101,
+        "n_cases": 2
+      }
+    ],
+    "generated_only_max_case_share": 0.0101
+  },
+  "mean_length_ratio_generated_over_original": 1.0002,
+  "verdict": "no generation artefact detected by these three measurements",
+  "flags": [],
+  "p1_clause": "P1 5.9: 'The manual-validation pass on a stratified sample checks that generated cases do not contain detectable generation artefacts (such as templated phrasing that signals the perturbation).'",
+  "interpretation": "The two INDEPENDENT measurements are edit localisation and the generated-only vocabulary spread. The n-gram and length comparisons are confirmatory but partly entailed by the first: when the generated passage is ~99% token-identical to its original, it necessarily inherits that original's phrasing profile, so n-gram parity is close to guaranteed and must not be reported as independent evidence. The vocabulary spread does stay informative under a small edit -- a stock word inserted into every passage would reach a case share of 1.0 while moving the edit fraction barely at all -- and it comes back at 0.0101.",
+  "deviation": "P1 places this check in the human annotator checklist. It is not there, and the annotation could not be redone before submission, so this is an automated substitute measuring the same property over ALL generated passages rather than a stratified sample. It cannot detect an artefact nobody thought to count; a clean verdict is a claim about these three measurements and nothing wider."
+}

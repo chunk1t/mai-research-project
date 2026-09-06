@@ -1,0 +1,358 @@
+{
+  "n_instances": 450,
+  "pass_threshold": 0.5,
+  "judge": {
+    "provider": "google_aistudio",
+    "model": "gemini-3.5-flash-lite",
+    "family": "google"
+  },
+  "coverage": {
+    "refusal": {
+      "faithfulness": {
+        "n": 150,
+        "n_defined": 51,
+        "fraction_defined": 0.34
+      },
+      "answer_relevance": {
+        "n": 150,
+        "n_defined": 148,
+        "fraction_defined": 0.9867
+      },
+      "context_relevance": {
+        "n": 150,
+        "n_defined": 150,
+        "fraction_defined": 1.0
+      }
+    },
+    "conflict": {
+      "faithfulness": {
+        "n": 150,
+        "n_defined": 65,
+        "fraction_defined": 0.4333
+      },
+      "answer_relevance": {
+        "n": 150,
+        "n_defined": 129,
+        "fraction_defined": 0.86
+      },
+      "context_relevance": {
+        "n": 150,
+        "n_defined": 150,
+        "fraction_defined": 1.0
+      }
+    },
+    "noise": {
+      "faithfulness": {
+        "n": 150,
+        "n_defined": 119,
+        "fraction_defined": 0.7933
+      },
+      "answer_relevance": {
+        "n": 150,
+        "n_defined": 147,
+        "fraction_defined": 0.98
+      },
+      "context_relevance": {
+        "n": 150,
+        "n_defined": 150,
+        "fraction_defined": 1.0
+      }
+    }
+  },
+  "correlations": {
+    "refusal": {
+      "faithfulness": {
+        "spearman_rho": 0.1586,
+        "n_pairs": 51,
+        "purpose_built_metric": "correct behaviour (1) vs failure (0)"
+      },
+      "answer_relevance": {
+        "spearman_rho": -0.048,
+        "n_pairs": 148,
+        "purpose_built_metric": "correct behaviour (1) vs failure (0)"
+      },
+      "context_relevance": {
+        "spearman_rho": -0.3114,
+        "n_pairs": 150,
+        "purpose_built_metric": "correct behaviour (1) vs failure (0)"
+      }
+    },
+    "conflict": {
+      "faithfulness": {
+        "spearman_rho": 0.2155,
+        "n_pairs": 65,
+        "purpose_built_metric": "CRS (0-4)"
+      },
+      "answer_relevance": {
+        "spearman_rho": 0.1289,
+        "n_pairs": 129,
+        "purpose_built_metric": "CRS (0-4)"
+      },
+      "context_relevance": {
+        "spearman_rho": 0.1402,
+        "n_pairs": 150,
+        "purpose_built_metric": "CRS (0-4)"
+      }
+    },
+    "noise": {
+      "faithfulness": {
+        "spearman_rho": 0.2695,
+        "n_pairs": 119,
+        "purpose_built_metric": "correct behaviour (1) vs failure (0)"
+      },
+      "answer_relevance": {
+        "spearman_rho": -0.1394,
+        "n_pairs": 120,
+        "purpose_built_metric": "correct behaviour (1) vs failure (0)"
+      },
+      "context_relevance": {
+        "spearman_rho": 0.1159,
+        "n_pairs": 120,
+        "purpose_built_metric": "correct behaviour (1) vs failure (0)"
+      }
+    }
+  },
+  "coverage_gap": {
+    "refusal": {
+      "faithfulness": {
+        "ragas_metric": "faithfulness",
+        "dimension": "refusal",
+        "pass_threshold": 0.5,
+        "n_instances": 150,
+        "n_failures_by_purpose_built_metric": 34,
+        "n_failures_ragas_scores_as_passing": 10,
+        "n_failures_ragas_cannot_score": 20,
+        "miss_rate": 0.7143,
+        "n_successes_ragas_scores_as_passing": 32,
+        "pass_rate_on_successes": 0.8649,
+        "discriminative": true,
+        "mean_ragas_on_failures": 0.6731,
+        "mean_ragas_on_successes": 0.7973,
+        "separation": 0.1242
+      },
+      "answer_relevance": {
+        "ragas_metric": "answer_relevance",
+        "dimension": "refusal",
+        "pass_threshold": 0.5,
+        "n_instances": 150,
+        "n_failures_by_purpose_built_metric": 34,
+        "n_failures_ragas_scores_as_passing": 10,
+        "n_failures_ragas_cannot_score": 2,
+        "miss_rate": 0.3125,
+        "n_successes_ragas_scores_as_passing": 19,
+        "pass_rate_on_successes": 0.1638,
+        "discriminative": true,
+        "mean_ragas_on_failures": 0.4627,
+        "mean_ragas_on_successes": 0.4092,
+        "separation": -0.0536
+      },
+      "context_relevance": {
+        "ragas_metric": "context_relevance",
+        "dimension": "refusal",
+        "pass_threshold": 0.5,
+        "n_instances": 150,
+        "n_failures_by_purpose_built_metric": 34,
+        "n_failures_ragas_scores_as_passing": 0,
+        "n_failures_ragas_cannot_score": 0,
+        "miss_rate": 0.0,
+        "n_successes_ragas_scores_as_passing": 0,
+        "pass_rate_on_successes": 0.0,
+        "discriminative": false,
+        "mean_ragas_on_failures": 0.0427,
+        "mean_ragas_on_successes": 0.0131,
+        "separation": -0.0296
+      }
+    },
+    "conflict": {
+      "faithfulness": {
+        "ragas_metric": "faithfulness",
+        "dimension": "conflict",
+        "pass_threshold": 0.5,
+        "n_instances": 150,
+        "n_failures_by_purpose_built_metric": 145,
+        "n_failures_ragas_scores_as_passing": 42,
+        "n_failures_ragas_cannot_score": 85,
+        "miss_rate": 0.7,
+        "n_successes_ragas_scores_as_passing": 5,
+        "pass_rate_on_successes": 1.0,
+        "discriminative": true,
+        "mean_ragas_on_failures": 0.6667,
+        "mean_ragas_on_successes": 1.0,
+        "separation": 0.3333
+      },
+      "answer_relevance": {
+        "ragas_metric": "answer_relevance",
+        "dimension": "conflict",
+        "pass_threshold": 0.5,
+        "n_instances": 150,
+        "n_failures_by_purpose_built_metric": 145,
+        "n_failures_ragas_scores_as_passing": 39,
+        "n_failures_ragas_cannot_score": 21,
+        "miss_rate": 0.3145,
+        "n_successes_ragas_scores_as_passing": 2,
+        "pass_rate_on_successes": 0.4,
+        "discriminative": true,
+        "mean_ragas_on_failures": 0.4489,
+        "mean_ragas_on_successes": 0.5524,
+        "separation": 0.1035
+      },
+      "context_relevance": {
+        "ragas_metric": "context_relevance",
+        "dimension": "conflict",
+        "pass_threshold": 0.5,
+        "n_instances": 150,
+        "n_failures_by_purpose_built_metric": 145,
+        "n_failures_ragas_scores_as_passing": 0,
+        "n_failures_ragas_cannot_score": 0,
+        "miss_rate": 0.0,
+        "n_successes_ragas_scores_as_passing": 0,
+        "pass_rate_on_successes": 0.0,
+        "discriminative": false,
+        "mean_ragas_on_failures": 0.0256,
+        "mean_ragas_on_successes": 0.0404,
+        "separation": 0.0147
+      }
+    },
+    "noise": {
+      "faithfulness": {
+        "ragas_metric": "faithfulness",
+        "dimension": "noise",
+        "pass_threshold": 0.5,
+        "n_instances": 120,
+        "n_failures_by_purpose_built_metric": 29,
+        "n_failures_ragas_scores_as_passing": 20,
+        "n_failures_ragas_cannot_score": 0,
+        "miss_rate": 0.6897,
+        "n_successes_ragas_scores_as_passing": 82,
+        "pass_rate_on_successes": 0.9111,
+        "discriminative": true,
+        "mean_ragas_on_failures": 0.6466,
+        "mean_ragas_on_successes": 0.8813,
+        "separation": 0.2348
+      },
+      "answer_relevance": {
+        "ragas_metric": "answer_relevance",
+        "dimension": "noise",
+        "pass_threshold": 0.5,
+        "n_instances": 120,
+        "n_failures_by_purpose_built_metric": 29,
+        "n_failures_ragas_scores_as_passing": 25,
+        "n_failures_ragas_cannot_score": 0,
+        "miss_rate": 0.8621,
+        "n_successes_ragas_scores_as_passing": 63,
+        "pass_rate_on_successes": 0.6923,
+        "discriminative": true,
+        "mean_ragas_on_failures": 0.6142,
+        "mean_ragas_on_successes": 0.5868,
+        "separation": -0.0274
+      },
+      "context_relevance": {
+        "ragas_metric": "context_relevance",
+        "dimension": "noise",
+        "pass_threshold": 0.5,
+        "n_instances": 120,
+        "n_failures_by_purpose_built_metric": 29,
+        "n_failures_ragas_scores_as_passing": 0,
+        "n_failures_ragas_cannot_score": 0,
+        "miss_rate": 0.0,
+        "n_successes_ragas_scores_as_passing": 1,
+        "pass_rate_on_successes": 0.011,
+        "discriminative": false,
+        "mean_ragas_on_failures": 0.0298,
+        "mean_ragas_on_successes": 0.0469,
+        "separation": 0.0171
+      }
+    }
+  },
+  "descriptive": {
+    "refusal": {
+      "faithfulness": 0.7632,
+      "answer_relevance": 0.4208,
+      "context_relevance": 0.0198
+    },
+    "conflict": {
+      "faithfulness": 0.6923,
+      "answer_relevance": 0.4529,
+      "context_relevance": 0.0261
+    },
+    "noise": {
+      "faithfulness": 0.8241,
+      "answer_relevance": 0.548,
+      "context_relevance": 0.0382
+    }
+  },
+  "abstention": {
+    "note": "Instances where the pipeline abstained, against those where it committed to an answer. Faithfulness is 0/0 on an abstention and is reported as undefined rather than coerced; the fraction_defined row is therefore the measurement, not a data-quality figure.",
+    "abstained": {
+      "n": 188,
+      "faithfulness": {
+        "n_defined": 1,
+        "fraction_defined": 0.0053,
+        "mean_where_defined": 1.0
+      },
+      "answer_relevance": {
+        "n_defined": 188,
+        "fraction_defined": 1.0,
+        "mean_where_defined": 0.3436
+      },
+      "context_relevance": {
+        "n_defined": 188,
+        "fraction_defined": 1.0,
+        "mean_where_defined": 0.0099
+      }
+    },
+    "committed": {
+      "n": 262,
+      "faithfulness": {
+        "n_defined": 234,
+        "fraction_defined": 0.8931,
+        "mean_where_defined": 0.7735
+      },
+      "answer_relevance": {
+        "n_defined": 236,
+        "fraction_defined": 0.9008,
+        "mean_where_defined": 0.5791
+      },
+      "context_relevance": {
+        "n_defined": 262,
+        "fraction_defined": 1.0,
+        "mean_where_defined": 0.0411
+      }
+    }
+  },
+  "noise_ratio_response": {
+    "note": "Mean RAGAS score by noise ratio on the noise testbed. The purpose-built NDC is built from exactly this x-axis, so a RAGAS metric that does not move across it is not measuring noise.",
+    "by_ratio": {
+      "0.00": {
+        "n": 31,
+        "faithfulness": 0.8043,
+        "answer_relevance": 0.5796,
+        "context_relevance": 0.0329
+      },
+      "0.25": {
+        "n": 36,
+        "faithfulness": 0.8906,
+        "answer_relevance": 0.5527,
+        "context_relevance": 0.0627
+      },
+      "0.50": {
+        "n": 25,
+        "faithfulness": 0.8708,
+        "answer_relevance": 0.5123,
+        "context_relevance": 0.0743
+      },
+      "0.75": {
+        "n": 30,
+        "faithfulness": 0.8167,
+        "answer_relevance": 0.5199,
+        "context_relevance": 0.013
+      },
+      "0.90": {
+        "n": 28,
+        "faithfulness": 0.7216,
+        "answer_relevance": 0.5681,
+        "context_relevance": 0.0076
+      }
+    }
+  }
+}
